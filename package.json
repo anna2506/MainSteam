@@ -1,0 +1,13 @@
+{
+  "name": "main-steam",
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "husky": "^4.3.0",
+    "lerna": "^3.22.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lerna run lint-staged --npm-client=yarn && cross-env CI=true lerna run test --npm-client=yarn"
+    }
+  }
+}

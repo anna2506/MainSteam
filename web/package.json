@@ -1,5 +1,5 @@
 {
-  "name": "main-steam",
+  "name": "main-steam-web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,8 +11,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --passWithNoTests",
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .jsx, .js src",
+    "lint-staged": "lint-staged"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -23,6 +25,11 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@testing-library/react": "^9.3.2"
+    "@testing-library/react": "^9.3.2",
+    "eslint-config-airbnb": "^18.2.0",
+    "lint-staged": "^10.4.2"
+  },
+  "lint-staged": {
+    "src/*.(js|jsx)": "eslint"
   }
 }
