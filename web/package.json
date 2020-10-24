@@ -30,6 +30,6 @@
     "lint-staged": "^10.4.2"
   },
   "lint-staged": {
-    "src/*.(js|jsx)": "eslint"
+    "src/**/*.(js|jsx)": "eslint"
   }
 }

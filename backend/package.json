@@ -2,14 +2,23 @@
     "name": "main-steam-backend",
     "scripts": {
         "lint-staged": "lint-staged",
-        "test": "jest --passWithNoTests"
+        "test": "jest --passWithNoTests",
+        "start": "node src",
+        "lint": "eslint src"
     },
     "devDependencies": {
+        "eslint": "^7.12.0",
         "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-plugin-import": "^2.22.1",
         "jest": "^26.6.1",
         "lint-staged": "^10.4.2"
     },
     "lint-staged": {
-        "src/*.(js|jsx)": "eslint"
+        "src/**/*.(js|jsx)": "eslint"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1"
     }
 }
