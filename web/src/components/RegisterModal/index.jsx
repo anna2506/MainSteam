@@ -4,6 +4,8 @@ import 'react-responsive-modal/styles.css';
 import Modal from 'react-responsive-modal';
 import styled from 'styled-components';
 import { ReactComponent as CrossSvg } from '../../assets/cross.svg';
+import LogIn from './LogIn';
+import Register from './Register';
 
 const Header = styled.div`
   height: 50px;
@@ -11,8 +13,10 @@ const Header = styled.div`
   flex: 2;
   padding: 24px 25px 0 50px;
   flex-direction: row;
-  border-bottom: 3px solid blue;
+  border-bottom: 3px solid #0201c7;
+  background-color: #8383e3;
   justify-content: space-between;
+  border-radius: 15px 15px 0 0;
 `;
 
 const Text = styled.button`
@@ -21,13 +25,23 @@ const Text = styled.button`
   background: none;
   border: none;
   font-size: 16pt;
-  color: ${(props) => (props.selected ? 'blue' : 'black')};
+  outline: none;
+  color: ${(props) => (props.selected ? '#ffec00' : 'white')};
+  cursor: pointer;
+  :hover { color: #ffec00; }
 `;
 
-const Content = styled.form`
-  display: flex;
-  flex: 1;
+const Content = styled.div`
   padding: 24px 50px;
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+`;
+
+const Cross = styled(CrossSvg)`
+  fill: white;
+  cursor: pointer;
+  :hover { fill: #ffec00; }
 `;
 
 function RegisterModal(props) {
@@ -62,7 +76,7 @@ function RegisterModal(props) {
             selected={step === 'LogIn'}
             onClick={() => setStep('LogIn')}
           >
-            Войти
+            Вход
           </Text>
           <Text
             selected={step === 'Register'}
@@ -71,9 +85,13 @@ function RegisterModal(props) {
             Регистрация
           </Text>
         </div>
-        <CrossSvg onClick={onClose} />
+        <Cross onClick={onClose} />
       </Header>
-      <Content>To be continued...</Content>
+      <Content>
+        {step === 'LogIn'
+          ? <LogIn />
+          : <Register />}
+      </Content>
     </Modal>
   );
 }
