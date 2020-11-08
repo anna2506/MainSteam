@@ -11,9 +11,8 @@ const Header = styled.div`
   height: 50px;
   display: flex;
   flex: 2;
-  padding: 24px 25px 0 50px;
+  padding: 25px 30px 0;
   flex-direction: row;
-  border-bottom: 3px solid #0201c7;
   background-color: #8383e3;
   justify-content: space-between;
   border-radius: 15px 15px 0 0;
@@ -28,11 +27,22 @@ const Text = styled.button`
   outline: none;
   color: ${(props) => (props.selected ? '#ffec00' : 'white')};
   cursor: pointer;
+  position: relative;
   :hover { color: #ffec00; }
+  span {
+    position: absolute;
+    bottom: -26px;
+    left: calc(50% - 10px);
+    width: 0;
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 15px solid white;
+  }
 `;
 
 const Content = styled.div`
-  padding: 24px 50px;
+  padding: 20px 20px;
   min-height: 350px;
   display: flex;
   align-items: center;
@@ -42,6 +52,7 @@ const Cross = styled(CrossSvg)`
   fill: white;
   cursor: pointer;
   :hover { fill: #ffec00; }
+  margin-top: 5px;
 `;
 
 function RegisterModal(props) {
@@ -50,9 +61,10 @@ function RegisterModal(props) {
   const styles = {
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.3)',
+      zIndex: 10000,
     },
     modal: {
-      maxWidth: '600px',
+      maxWidth: '450px',
       padding: '0',
       borderRadius: '15px',
       display: 'flex',
@@ -77,12 +89,14 @@ function RegisterModal(props) {
             onClick={() => setStep('LogIn')}
           >
             Вход
+            {step === 'LogIn' && <span />}
           </Text>
           <Text
             selected={step === 'Register'}
             onClick={() => setStep('Register')}
           >
             Регистрация
+            {step === 'Register' && <span />}
           </Text>
         </div>
         <Cross onClick={onClose} />
