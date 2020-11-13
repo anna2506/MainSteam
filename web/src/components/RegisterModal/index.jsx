@@ -43,9 +43,11 @@ const Text = styled.button`
 
 const Content = styled.div`
   padding: 20px 20px;
-  min-height: 350px;
+  height: ${(props) => (props.isLogin ? '200px' : '350px')};
+  overflow: hidden;
   display: flex;
   align-items: center;
+  transition: all 0.3s ease;
 `;
 
 const Cross = styled(CrossSvg)`
@@ -101,7 +103,7 @@ function RegisterModal(props) {
         </div>
         <Cross onClick={onClose} />
       </Header>
-      <Content>
+      <Content isLogin={step === 'LogIn'}>
         {step === 'LogIn'
           ? <LogIn />
           : <Register />}

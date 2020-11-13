@@ -8,12 +8,12 @@ ALTER SEQUENCE public.player_id_seq
 
 CREATE TABLE public.player (
         id INTEGER NOT NULL default nextval('player_id_seq'::regclass),
-        login TEXT NOT NULL,
+        login TEXT NOT NULL UNIQUE,
         pass_hash TEXT NOT NULL,
-        pass_salt TEXT NOT NULL,
         experience INTEGER NOT NULL default 0,
         country TEXT default 'Russia',
         email TEXT NOT NULL,
+        token TEXT NOT NULL,
         CONSTRAINT pk_player PRIMARY KEY (id)
 );
 
