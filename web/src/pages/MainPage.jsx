@@ -12,6 +12,8 @@ class MainPage extends PureComponent {
                 <Navbar/>
                 <Styled.contentContainer>
                     <Styled.mainPageContent>
+                        <Styled.typography>New gaming era <br />Coming soon!</Styled.typography>
+                        <Styled.loginButton>Sign In</Styled.loginButton>
                         <Styled.imageContainer><Styled.mainPageImage src={mainImage}/></Styled.imageContainer>
                     </Styled.mainPageContent>
                 </Styled.contentContainer>

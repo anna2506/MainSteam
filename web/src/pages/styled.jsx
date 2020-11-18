@@ -20,24 +20,55 @@ export const contentContainer = styled.div`
     grid-area: c;
     grid-column: 1 / -1;
     position: relative;
+    width: 100%;
     
 `
 
 export const mainPageContent = styled.div`
     position: absolute;
-    max-width: 1102px;
     margin: auto;
-    top: 0; left: 0; bottom: 0; right: 0;
+    top: 0; left: 217px; bottom: 0; right: 217px;
+    display: flex;
+    justify-content: flex-end;
 `
 
 export const imageContainer = styled.div`
     position: relative;
+    overflow: hidden;
+    align-self: center;
+    width: 520px;
 `
 
 export const mainPageImage = styled.img`
-    position: absolute;
-    max-width: 362px;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
+    width: 100%;
+    height: auto;
 `
+
+export const loginButton = styled.button`
+    position: absolute;
+    background: #0201C7;
+    box-shadow: 0px 2px 4px rgba(30, 30, 64, 0.25);
+    border-radius: 10px;
+    width: 96px;
+    height: 32px;
+    font-size: 16px;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    top: 65%;
+    right: 47%;
+    outline: none;
+`
+
+export const typography = styled.p`
+    position: absolute;
+    width: 489px;
+    top: 18%;
+    right: 35%;
+    font-size: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: #FFEC00;
+    text-shadow: 0px 8px 4px rgba(30, 30, 64, 0.25);
+    z-index: 100;
+ `
