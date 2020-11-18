@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import app from './app';
-import steam from './steam';
+import application from './application/reducer';
+import steam from './steam/reducer';
 
 const appReducer = combineReducers({
-  app,
+  application,
   steam,
 });
 

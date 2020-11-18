@@ -1,17 +1,17 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
-import Routes from './Routes';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import { BrowserRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router';
+import MainPage from './pages/MainPage';
+import routes from './routes';
 
 function App() {
   return (
-    <Router history={createBrowserHistory()}>
-      <Navbar />
-      <Routes />
-      <Footer />
-    </Router>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path={routes.mainPage} component={MainPage} />
+        <Route component={() => <h1>Not Found</h1>} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
