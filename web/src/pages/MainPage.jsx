@@ -1,8 +1,8 @@
 import React, {PureComponent} from "react";
+import * as Styled from "./styled";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import * as Styled from "./styled";
-import mainImage from "./mainPagePic.svg";
+import mainImage from "../assets/mainPagePic.svg";
 
 
 class MainPage extends PureComponent {

@@ -2,7 +2,6 @@ import React from "react";
 import {GitHub} from "@material-ui/icons";
 import {Link} from "@material-ui/core";
 import * as Styled from "./styled";
-import github from "./github-logo.svg"
 
 const Footer = () => {
     return (
