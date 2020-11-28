@@ -1,20 +1,21 @@
-import React from "react";
-import {GitHub} from "@material-ui/icons";
-import {Link} from "@material-ui/core";
-import * as Styled from "./styled";
+import React from 'react';
+import * as Styled from './styled';
+import Github from '../../assets/github.svg';
+import Figma from '../../assets/figma.svg';
 
 const Footer = () => {
     return (
-        <Styled.footerWrapper>
-            <Styled.wave />
-            <Styled.iconsWrapper>
-                <Link href="https://github.com/anna2506/MainSteam" color="inherit">
-                   <Styled.iconWrapper>
-                        <GitHub style={{ fontSize: 36 }}/>
-                    </Styled.iconWrapper>
-                </Link>
-            </Styled.iconsWrapper>
-        </Styled.footerWrapper>
+        <Styled.Footer>
+            {/*<Styled.Wave />*/}
+            <Styled.IconsContainer>
+                <Styled.Link href="https://github.com/anna2506/MainSteam">
+                    <Styled.Icon src={Github} />
+                </Styled.Link>
+                <Styled.Link href="https://www.figma.com/file/e52de0n719MUHHIlVaJZMy/WebITMO?node-id=41%3A0">
+                    <Styled.Icon src={Figma} />
+                </Styled.Link>
+            </Styled.IconsContainer>
+        </Styled.Footer>
     )
 };
 

@@ -1,18 +1,20 @@
-import React from "react";
-import * as Styled from "./styled";
+import React from 'react';
+import * as Styled from './styled';
 
 const Navbar = () => {
         return (
-            <Styled.container>
-                <Styled.navContainer>
-                    <Styled.ul>
-                        <li className="login">Login</li>
-                        <li>Home</li>
-                        <li>Rating</li>
-                        <li>Store</li>
-                    </Styled.ul>
-                </Styled.navContainer>
-            </Styled.container>
+            <Styled.Header>
+                <Styled.Container>
+                    <Styled.LoginButton>
+                        Login
+                    </Styled.LoginButton>
+                    <Styled.Ul>
+                        <Styled.Li><Styled.Link href="#">HOME</Styled.Link></Styled.Li>
+                        <Styled.Li><Styled.Link href="#">RATING</Styled.Link></Styled.Li>
+                        <Styled.Li><Styled.Link href="#">STORE</Styled.Link></Styled.Li>
+                    </Styled.Ul>
+                </Styled.Container>
+            </Styled.Header>
         )
 };
 

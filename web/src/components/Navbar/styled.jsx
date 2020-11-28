@@ -1,35 +1,44 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const container = styled.div`
-    grid-area: h;
-    grid-column: 1 / -1;
-    position: relative;
+
+export const Header = styled.header`
+    background: #efefef;
+    padding: 1.3em 0;
     background: linear-gradient(180deg, #C87D37 22.92%, rgba(255, 173, 100, 0) 100%), #FFAD64;
 `
 
-export const navContainer = styled.nav`
-    margin-right: 217px;
-    margin-left: 217px;
-    height: 100%;
+export const Container = styled.div`
+    margin: 0 auto;
+    width: 90%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
 `
 
-export const ul = styled.ul`
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    li {
-        text-align: center;        
-        color: white;
-        font-size: 20px;
-        box-sizing: border-box;        
-        list-style-type: none;
-        padding: 21px;
+export const LoginButton = styled.button`
+    border: 0;
+    background: transparent;
+    &:hover, focus {
+        color: #1d1d1d;
+        cursor: pointer;
     }
-    .login {
-        margin-right: auto;
-        padding: 0;
+`
+
+export const Ul = styled.ul`
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+`
+
+export const Li = styled.li`
+    margin-left: 2em;
+`
+
+export const Link = styled.a`
+    color: #fff;
+    text-decoration: none;
+    &:hover, focus {
+        color: #1d1d1d;
     }
 `
