@@ -6,7 +6,7 @@ const Navbar = () => {
             <Styled.Header>
                 <Styled.Container>
                     <Styled.LoginButton>
-                        Login
+                        LOGIN
                     </Styled.LoginButton>
                     <Styled.Ul>
                         <Styled.Li><Styled.Link href="#">HOME</Styled.Link></Styled.Li>

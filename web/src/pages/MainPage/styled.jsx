@@ -23,7 +23,8 @@ export const Title = styled.h2`
    position: absolute;
    font-size: 3rem;
    top: 30%;
-   color: #FFEC00;
+   color: #FFFFFF;
+   text-shadow: 0px 8px 4px rgba(29, 29, 29, 0.5);
 `
 
 export const ButtonContainer = styled.div`
@@ -48,6 +49,13 @@ export const SignInButton = styled.button`
     position: absolute;
     top: 65%;
     left: 70%;
+    transition: all 500ms ease;
+    &:hover, focus {
+        background: rgba(255,255,255,1);
+        color: #0201C7;
+        box-shadow: inset 0 0 0 3px #0201C7;
+        cursor: pointer;
+    }
 `
 
 export const Image = styled.img`

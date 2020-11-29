@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Switch } from 'react-router';
 import routes from './routes';
-import {createGlobalStyle} from "styled-components";
+import {createGlobalStyle} from 'styled-components';
 import MainPage from './pages/MainPage/MainPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import RatingPage from './pages/RatingPage/RatingPage';
@@ -34,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
         font-size: 1.125rem;
         color: #fff;
         height: 100%;
-        font-size: 20px;
+        
     }
     button {
         font-family: 'Black Ops One', cursive;
