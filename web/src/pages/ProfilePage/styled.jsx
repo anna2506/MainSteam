@@ -10,13 +10,13 @@ export const Content = styled.div`
     background-size: 90px 90px,
     90px 90px;
     
-`
+`;
 
 export const MainContent = styled.div`
     flex: 1 0 auto;
     position: relative;  
     margin-top: 2em;
-`
+`;
 
 export const Container = styled.div`
     margin: 0 auto;
@@ -24,17 +24,17 @@ export const Container = styled.div`
     max-width: 900px;
     display: flex;
     flex-direction: column;
-`
+`;
 
 export const Main = styled.main`
     display: flex;
     justify-content: space-between;
-`
+`;
 
 export const Aside = styled.div`
     display: flex;
     justify-content: space-between;
-`
+`;
 
 export const ProfileMainContent = styled.div`
     display: flex;
@@ -42,45 +42,45 @@ export const ProfileMainContent = styled.div`
     padding-bottom: 2em;
     margin-bottom: 2em;
     justify-content: space-between;
-`
+`;
 
 export const ProfileExtraContent = styled.div`
     text-align: right:
     width: 15%;
-`
+`;
 
 export const ProfileExtraInfo = styled.div`
     text-align: right;
-`
+`;
 
 export const ProfileImage = styled.img`
     width: 25%;
     border-radius: 50%;
     border: 3px solid #FFCD48;
-`
+`;
 
 export const ProfileDescription = styled.div`
     width: 65%;
     display: flex;
     flex-direction: column;
-`
+`;
 
 export const Nickname = styled.p`
     font-size: 1.4rem;
-`
+`;
 
 export const Description = styled.p`
     width: 55%;
     border-bottom: 1px solid #FFCD48;
     overflow: hidden;
     text-overflow: ellipsis;
-`
+`;
 
 export const Level = styled.p`
     font-size: 1.4rem;
     text-align: right;
     margin-right: 0;
-`
+`;
 
 export const EditProfile = styled.button`
     background: transparent;
@@ -89,13 +89,13 @@ export const EditProfile = styled.button`
         color: #FFCD48;
         cursor: pointer;
     }
-`
+`;
 
 export const Status = styled.p`
     font-size: 1.2rem;
     margin-bottom: 1.2em;
-`
+`;
 
 export const Info = styled.p`
     padding-bottom: 1em;
-`
+`;

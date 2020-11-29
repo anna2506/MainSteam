@@ -16,6 +16,7 @@ const Header = styled.div`
   background-color: #8383e3;
   justify-content: space-between;
   border-radius: 15px 15px 0 0;
+  box-sizing: content-box;
 `;
 
 const Text = styled.button`
@@ -28,6 +29,7 @@ const Text = styled.button`
   color: ${(props) => (props.selected ? '#ffec00' : 'white')};
   cursor: pointer;
   position: relative;
+  padding: 1px 6px;
   :hover { color: #ffec00; }
   span {
     position: absolute;
@@ -48,6 +50,7 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   transition: all 0.3s ease;
+  box-sizing: content-box;
 `;
 
 const Cross = styled(CrossSvg)`
@@ -62,7 +65,7 @@ function RegisterModal(props) {
   const [step, setStep] = useState('LogIn');
   const styles = {
     overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.3)',
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
       zIndex: 10000,
     },
     modal: {
@@ -90,14 +93,14 @@ function RegisterModal(props) {
             selected={step === 'LogIn'}
             onClick={() => setStep('LogIn')}
           >
-            Вход
+            LogIn
             {step === 'LogIn' && <span />}
           </Text>
           <Text
             selected={step === 'Register'}
             onClick={() => setStep('Register')}
           >
-            Регистрация
+            Register
             {step === 'Register' && <span />}
           </Text>
         </div>
@@ -105,8 +108,8 @@ function RegisterModal(props) {
       </Header>
       <Content isLogin={step === 'LogIn'}>
         {step === 'LogIn'
-          ? <LogIn />
-          : <Register />}
+          ? <LogIn closeModal={onClose} />
+          : <Register closeModal={onClose} />}
       </Content>
     </Modal>
   );

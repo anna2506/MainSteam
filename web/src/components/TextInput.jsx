@@ -25,20 +25,26 @@ const Input = styled.input`
   height: 25px;
   font-size: 14pt;
   position: relative;
+  box-sizing: content-box;
 `;
 
 const PassShowButton = styled.button`
   background: none;
   border: none;
   position: absolute;
-  right: 5px;
-  bottom: 5px;
+  right: 10px;
+  bottom: 0px;
   outline: none;
   cursor: pointer;
 `;
 
 function TextInput(props) {
-  const { name, type } = props;
+  const {
+    name,
+    type,
+    onChange,
+    value,
+  } = props;
   const [passShow, setPassShow] = useState(false);
   if (type === 'password') {
     const inputType = passShow ? 'text' : 'password';
@@ -47,7 +53,12 @@ function TextInput(props) {
         <Label htmlFor={name}>
           {name}
         </Label>
-        <Input id={name} type={inputType} />
+        <Input
+          id={name}
+          type={inputType}
+          onChange={onChange}
+          value={value}
+        />
         {passShow
           ? (
             <PassShowButton type="button" onClick={() => setPassShow(false)}>
@@ -67,7 +78,12 @@ function TextInput(props) {
       <Label htmlFor={name}>
         {name}
       </Label>
-      <Input id={name} type={type} />
+      <Input
+        id={name}
+        type={type}
+        onChange={onChange}
+        value={value}
+      />
     </Wrapper>
   );
 }
@@ -75,9 +91,13 @@ function TextInput(props) {
 TextInput.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string,
+  onChange: PropTypes.func,
+  value: PropTypes.string,
 };
 
 TextInput.defaultProps = {
   type: 'text',
+  onChange: (() => {}),
+  value: '',
 };
 export default TextInput;

@@ -1,5 +1,6 @@
 {
     "scripts": {
-        "docker": "docker build -t mainsteam_db ."
+        "docker": "docker build -t mainsteam_db .",
+        "start": "docker run -d -p 5432:5432 --rm mainsteam_db"
     }
 }

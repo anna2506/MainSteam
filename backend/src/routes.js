@@ -14,7 +14,7 @@ module.exports = (app) => {
       login,
       email,
       country,
-    } = request.payload;
+    } = request.body;
     if (await dbHelper.getUserByLogin(login)) {
       return response.status(500).json({ message: errorMessages.loginDuplicate });
     }
@@ -31,7 +31,7 @@ module.exports = (app) => {
     const {
       password,
       login,
-    } = request.payload;
+    } = request.body;
     const user = await dbHelper.getUserByLogin(login);
     if (!user) {
       return response.status(500).json({ message: errorMessages.wrongLogin });
