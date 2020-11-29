@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@reduxjs/toolkit": "^1.4.0",
     "axios": "^0.21.0",
     "history": "^5.0.0",
     "prop-types": "^15.7.2",
@@ -24,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .jsx, .js src",
+    "lint": "eslint --ext .jsx,.js src",
     "lint-staged": "lint-staged"
   },
   "eslintConfig": {
@@ -37,6 +38,7 @@
   ],
   "devDependencies": {
     "@testing-library/react": "^9.3.2",
+    "redux-devtools-extension": "^2.13.8",
     "eslint-config-airbnb": "^18.2.0",
     "lint-staged": "^10.4.2",
     "redux-logger": "^3.0.6"
