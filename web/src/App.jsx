@@ -6,6 +6,8 @@ import routes from './routes';
 import Main from './pages/MainPage/MainPage';
 import Profile from './pages/ProfilePage/ProfilePage';
 import Rating from './pages/RatingPage/RatingPage';
+import Store from './pages/Store';
+import Game from './pages/Game';
 
 function App() {
   return (
@@ -14,7 +16,8 @@ function App() {
         <Route exact path={routes.mainPage} component={Main} />
         <Route exact path={routes.profilePage} component={Profile} />
         <Route exact path={routes.rating} component={Rating} />
-        <Route exact path={routes.store} component={() => <h1>HERE WILL BE STORE</h1>} />
+        <Route exact path={routes.store} component={Store} />
+        <Route exact path={routes.game} component={Game} />
         <Route component={() => <h1>Not Found</h1>} />
       </Switch>
       <GlobalStyle />

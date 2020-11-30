@@ -3,4 +3,5 @@ export default {
   profilePage: '/profile',
   rating: '/rating',
   store: '/store',
+  game: '/store/1',
 };
