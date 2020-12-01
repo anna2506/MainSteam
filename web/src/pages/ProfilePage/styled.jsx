@@ -67,19 +67,21 @@ export const ProfileDescription = styled.div`
 
 export const Nickname = styled.p`
     font-size: 1.4rem;
+    color: #fff;
 `;
 
 export const Description = styled.p`
     width: 55%;
-    border-bottom: 1px solid #FFCD48;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #fff;
 `;
 
 export const Level = styled.p`
     font-size: 1.4rem;
     text-align: right;
     margin-right: 0;
+    color: #fff;
 `;
 
 export const EditProfile = styled.button`
@@ -94,8 +96,10 @@ export const EditProfile = styled.button`
 export const Status = styled.p`
     font-size: 1.2rem;
     margin-bottom: 1.2em;
+    color: #fff;
 `;
 
 export const Info = styled.p`
     padding-bottom: 1em;
+    color: #fff;
 `;

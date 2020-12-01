@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const Header = styled.header`
     background: #efefef;
     padding: 1.3em 0;
-    background: linear-gradient(180deg, #C87D37 22.92%, rgba(255, 173, 100, 0) 100%), #FFAD64;
+    background:  ${props => props.bg};
 `;
 
 export const Container = styled.div`
@@ -19,7 +19,7 @@ export const LoginButton = styled.button`
     border: 0;
     background: transparent;
     &:hover, focus {
-        color: #1d1d1d;
+        color: ${props => props.linkColor};
         cursor: pointer;
     }
 `;
@@ -39,6 +39,6 @@ export const StyledLink = styled(Link)`
     color: #fff;
     text-decoration: none;
     &:hover, focus {
-        color: #1d1d1d;
+        color: ${props => props.linkColor};
     }
 `;

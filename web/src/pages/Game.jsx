@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Layout from './Layout';
 import SnakeGameSvg from '../assets/snake-game.png';
 import Button from '../components/Button';
+import * as Styled from "../components/Navbar/styled";
 
 const Content = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ const Description = styled.p`
 `;
 
 const Store = () => (
-  <Layout color="#8383e3">
+  <Layout color="#8383e3" bg="linear-gradient(180deg, #5156B0 22.92%, #8383E3 100%)" linkColor="#FFCD48">
     <Content>
       <img src={SnakeGameSvg} alt=" " />
       <Button name="Play" />

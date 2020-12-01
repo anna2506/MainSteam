@@ -11,10 +11,10 @@ const Background = styled.div`
   padding: 20px 0;
 `;
 
-function Layout({ children, color }) {
+function Layout({ children, color, bg, linkColor }) {
   return (
     <>
-      <Navbar />
+      <Navbar bg={bg} linkColor={linkColor}/>
       <Background color={color}>
         {children}
       </Background>

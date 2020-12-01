@@ -23,7 +23,7 @@ const WelcomeText = styled.p`
 `;
 
 const Store = () => (
-  <Layout color="#8383e3">
+  <Layout color="#8383e3" bg="linear-gradient(180deg, #5156B0 22.92%, #8383E3 100%)" linkColor="#FFCD48">
     <WelcomeText>
       {/* TODO: get username from state */}
       Hello, Username! Would you like to play some game today?

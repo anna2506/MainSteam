@@ -9,6 +9,7 @@ export const Container = styled.div`
 export const CardsHeader = styled.p`
     font-size: 1.2rem;
     margin-bottom: 1.2em;
+    color: #fff;
 `;
 
 export const Card = styled.div`
@@ -31,9 +32,10 @@ export const Link = styled.a`
     text-decoration: none;
     &:hover, focus {
         color: #FFCD48;
+        cursor: pointer;
     }    
 `;
 
 export const Title = styled.h3`
-    
+    color: #fff;
 `;

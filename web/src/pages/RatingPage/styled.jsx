@@ -61,7 +61,7 @@ export const Country = styled.img`
 
 export const Nickname = styled.a`
     padding-right: 1em;
-    color: #fff;
+    color: #000;
     text-decoration: none;
     &:hover, focus {
         color: #1d1d1d;

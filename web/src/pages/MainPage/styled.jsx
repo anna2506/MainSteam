@@ -9,11 +9,10 @@ export const Content = styled.div`
 export const Main = styled.main`
     flex: 1 0 auto;
     position: relative;
-    background: #FFAD64;
+    background-color: #FFAD64;
     width: 100%;
     display: flex;
     justify-content: center;
-    align-self: center;
 `;
 
 export const Container = styled.div`
@@ -29,7 +28,8 @@ export const Container = styled.div`
 export const Title = styled.h2`
    position: absolute;
    font-size: 3rem;
-   top: 35%;
+   font-weight: 700;
+   top: 30%;
    left: 45px;
    color: #FFFFFF;
    text-shadow: 0px 8px 4px rgba(29, 29, 29, 0.5);
