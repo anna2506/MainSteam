@@ -156,4 +156,13 @@ module.exports = (app) => {
       return response.status(500).json({ message: e.message });
     }
   });
+
+  app.get('/rating', async (request, response) => {
+    const player = await getPlayerInfo(request.header);
+    if (player.error) {
+      return response.status(500).json({ message: player.error });
+    }
+    const rating = await dbHelper.getRating();
+    return response.json([...rating]);
+  });
 };

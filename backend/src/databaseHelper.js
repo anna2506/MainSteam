@@ -99,6 +99,13 @@ const savePlayerGame = async (
   ]);
 };
 
+const getRating = async () => {
+  const rating = await pool.query(`
+  SELECT login, experience, country FROM player ORDER BY experience
+  `);
+  return rating.rows;
+};
+
 module.exports = {
   getPlayerByLogin,
   getPlayerByEmail,
@@ -109,4 +116,5 @@ module.exports = {
   getPlayerGames,
   savePlayerGame,
   updatePlayer,
+  getRating,
 };
