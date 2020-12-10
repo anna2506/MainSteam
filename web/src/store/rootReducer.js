@@ -1,12 +1,16 @@
 import { combineReducers } from 'redux';
 import application from './application/reducer';
 import steam from './steam/reducer';
-import user from './user/reducer';
+import player from './player/reducer';
+import game from './game/reducer';
+import playerGame from './playerGame/reducer';
 
 const appReducer = combineReducers({
   application,
   steam,
-  user,
+  player,
+  game,
+  playerGame,
 });
 
 const rootReducer = (state, action) => appReducer(state, action);

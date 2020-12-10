@@ -11,6 +11,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.listen(port, () => {
   routes(app);
-  // eslint-disable-nex-line no-console
+  // eslint-disable-next-line no-console
   console.log(`App running on port ${port}.`);
 });

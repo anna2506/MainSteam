@@ -3,8 +3,7 @@ const errorMessages = require('./errorMessages');
 const authHelper = require('./authHelper');
 const tokenHelper = require('./token');
 
-const getPlayerInfo = async (header) => {
-  const { token } = header;
+const getPlayerInfo = async (token) => {
   const player = await dbHelper.getPlayerInfo(token);
   if (!player) {
     return { error: errorMessages.accessDenied };
@@ -52,15 +51,20 @@ module.exports = (app) => {
   });
 
   app.get('/player', async (request, response) => {
-    const player = await getPlayerInfo(request.header);
+    const player = await getPlayerInfo(request.headers.authorization);
     if (player.error) {
       return response.status(404).json({ message: errorMessages.playerNotFound });
     }
-    return response.json({ ...player });
+    return response.json({
+      login: player.login,
+      experience: player.experience,
+      country: player.country,
+      email: player.email,
+    });
   });
 
-  app.get('/games/{id}', async (request, response) => {
-    const player = await getPlayerInfo(request.header);
+  app.get('/games/:id', async (request, response) => {
+    const player = await getPlayerInfo(request.headers.authorization);
     if (player.error) {
       return response.status(500).json({ message: player.error });
     }
@@ -73,7 +77,7 @@ module.exports = (app) => {
   });
 
   app.get('/games', async (request, response) => {
-    const player = await getPlayerInfo(request.header);
+    const player = await getPlayerInfo(request.headers.authorization);
     if (player.error) {
       return response.status(500).json({ message: player.error });
     }
@@ -81,33 +85,35 @@ module.exports = (app) => {
     return response.json([...games]);
   });
 
-  app.get('/playerGame', async (request, response) => {
-    const player = await getPlayerInfo(request.header);
+  app.get('/playerGames', async (request, response) => {
+    const player = await getPlayerInfo(request.headers.authorization);
     if (player.error) {
       return response.status(500).json({ message: player.error });
     }
     const playerGames = await dbHelper.getPlayerGames(player.id);
-    playerGames.map((playerGame) => ({
-      gameId: playerGame.game_id,
-      timeSpent: playerGame.time_spent,
-      highScore: playerGame.high_score,
-      beat100: playerGame.beat_100,
-      beat200: playerGame.beat_200,
-      beat400: playerGame.beat_400,
-      beat700: playerGame.beat_700,
-      beat1000: playerGame.beat_1000,
-      beat10000: playerGame.beat_10000,
-    }));
-    return response.json([...playerGames]);
+    if (playerGames) {
+      playerGames.map((playerGame) => ({
+        gameId: playerGame.game_id,
+        timeSpent: playerGame.time_spent,
+        highScore: playerGame.high_score,
+        beat100: playerGame.beat_100,
+        beat200: playerGame.beat_200,
+        beat400: playerGame.beat_400,
+        beat700: playerGame.beat_700,
+        beat1000: playerGame.beat_1000,
+        beat10000: playerGame.beat_10000,
+      }));
+      return response.json([...playerGames]);
+    }
+    return response.json([]);
   });
 
-  app.post('/playerGame', async (request, response) => {
-    const player = await getPlayerInfo(request.header);
+  app.post('/playerGames', async (request, response) => {
+    const player = await getPlayerInfo(request.headers.authorization);
     if (player.error) {
       return response.status(500).json({ message: player.error });
     }
     const {
-      playerId,
       gameId,
       timeSpent,
       highScore,
@@ -120,7 +126,7 @@ module.exports = (app) => {
     } = request.body;
     try {
       await dbHelper.savePlayerGame(
-        playerId,
+        player.id,
         gameId,
         timeSpent,
         highScore,
@@ -131,34 +137,38 @@ module.exports = (app) => {
         beat1000,
         beat10000,
       );
-      return response.status(200);
+      return response.json({ ok: true });
     } catch (e) {
       return response.status(500).json({ message: e.message });
     }
   });
 
   app.put('/player', async (request, response) => {
-    const player = await getPlayerInfo(request.header);
+    const player = await getPlayerInfo(request.headers.authorization);
     if (player.error) {
       return response.status(500).json({ message: player.error });
     }
     const {
-      id,
       login,
       experience,
       country,
       email,
     } = request.body;
+
+    if (await dbHelper.getPlayerByLogin(login)) {
+      return response.status(500).json({ message: errorMessages.loginDuplicate });
+    }
+
     try {
-      await dbHelper.updatePlayer(login, experience, country, email, id);
-      return response.status(200);
+      await dbHelper.updatePlayer(login, experience, country, email, player.id);
+      return response.json({ ok: true });
     } catch (e) {
       return response.status(500).json({ message: e.message });
     }
   });
 
   app.get('/rating', async (request, response) => {
-    const player = await getPlayerInfo(request.header);
+    const player = await getPlayerInfo(request.headers.authorization);
     if (player.error) {
       return response.status(500).json({ message: player.error });
     }
