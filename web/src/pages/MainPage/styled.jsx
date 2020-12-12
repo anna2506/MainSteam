@@ -9,7 +9,7 @@ export const Content = styled.div`
 export const Main = styled.main`
     flex: 1 0 auto;
     position: relative;
-    background-color: #FFAD64;
+    background: linear-gradient(to top left, rgba(255, 205, 72, 1) 50%, rgba(255, 173, 100, 1) 50% );
     width: 100%;
     display: flex;
     justify-content: center;

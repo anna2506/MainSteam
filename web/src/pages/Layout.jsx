@@ -24,8 +24,10 @@ function Layout({ children, color, bg, linkColor }) {
 }
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-  color: PropTypes.string,
+    children: PropTypes.node.isRequired,
+    color: PropTypes.string,
+    bg: PropTypes.string,
+    linkColor: PropTypes.string,
 };
 
 Layout.defaultProps = {
