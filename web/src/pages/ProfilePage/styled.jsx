@@ -75,7 +75,33 @@ export const Description = styled.p`
     overflow: hidden;
     text-overflow: ellipsis;
     color: #fff;
+    font-size: .8em;
 `;
+
+export const EditableArea = styled.textarea`
+    width: 55%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+    background: transparent;
+    resize: none;
+    height: 100%;
+    outline: none;
+    border: 1px solid #FFCD48;
+`
+
+export const SaveBtn = styled.button`
+    background: transparent;
+    border: 0;
+    &:hover, focus {
+        color: #FFCD48;
+        cursor: pointer;
+    }
+    font-size: .8rem;
+    text-align: left;
+    max-width: max-content;
+    margin-top: .4em;
+`
 
 export const Level = styled.p`
     font-size: 1.4rem;

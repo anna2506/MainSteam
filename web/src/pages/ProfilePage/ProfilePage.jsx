@@ -7,6 +7,11 @@ import ProfileImage from '../../assets/ProfileImage.png';
 
 const ProfilePage = () => {
   const [isEditable, setIsEditable] = useState(false);
+  const [description, setDescription] = useState("Something...");
+
+  const editDescription = (event) => {
+    setDescription(event.target.value);
+  }
 
   return (
       <Styled.Content>
@@ -19,7 +24,9 @@ const ProfilePage = () => {
                 <Styled.ProfileImage src={ProfileImage}/>
                 <Styled.ProfileDescription>
                   <Styled.Nickname>Nickname</Styled.Nickname>
-                  <Styled.Description>Something...</Styled.Description>
+                  {isEditable ? <Styled.EditableArea maxlength="50" onChange={editDescription}>{description}</Styled.EditableArea> :
+                      <Styled.Description contenteditable={isEditable}>{description}</Styled.Description>}
+                  {isEditable && <Styled.SaveBtn onClick={() => setIsEditable(false)}>SAVE</Styled.SaveBtn>}
                 </Styled.ProfileDescription>
               </Styled.ProfileMainContent>
               <Styled.ProfileExtraContent>
