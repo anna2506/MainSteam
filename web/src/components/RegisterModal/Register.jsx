@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../TextInput';
 import Button from '../Button';
 import useActions from '../../helpers/useActions';
-import * as userActions from '../../store/user/actions';
+import * as playerActions from '../../store/player/actions';
 
 const ButtonWrapper = styled.div`
   width: 100%;
@@ -22,7 +22,7 @@ const Form = styled.form`
 
 function Register(props) {
   const { closeModal } = props;
-  const [register] = useActions([userActions.register]);
+  const [register] = useActions([playerActions.register]);
   const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import * as Styled from './styled';
 import RegisterModal from '../RegisterModal';
-import * as userSelectors from '../../store/user/selector';
-import * as userActions from '../../store/user/actions';
+import * as userSelectors from '../../store/player/selector';
+import * as userActions from '../../store/player/actions';
 import useActions from '../../helpers/useActions';
 
 const Navbar = ({bg, linkColor}) => {

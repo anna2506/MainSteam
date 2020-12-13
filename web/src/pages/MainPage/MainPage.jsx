@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import * as userSelectors from '../../store/user/selector';
+import * as playerSelectors from '../../store/player/selector';
 import * as Styled from './styled';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
@@ -9,7 +9,7 @@ import RegisterModal from '../../components/RegisterModal';
 
 const MainPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const isLoggedIn = useSelector((state) => userSelectors.isLoggedIn(state));
+  const isLoggedIn = useSelector((state) => playerSelectors.isLoggedIn(state));
   return (
     <>
       <RegisterModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
