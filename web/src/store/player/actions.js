@@ -76,3 +76,18 @@ export const getRating = () => (dispatch) => (
       });
   }))
 );
+
+export const getCountries = () => (dispatch) => (
+    new Promise(((resolve, reject) => {
+        dispatch({type: actionTypes.COUNTRIES_REQUEST});
+        services.getCountries()
+            .then((data) => {
+                dispatch({ type: actionTypes.COUNTRIES_SUCCESS, data});
+                resolve();
+            })
+            .catch((error) => {
+                dispatch({ type: actionTypes.COUNTRIES_FAILURE, message: error.message});
+                reject();
+            });
+    }))
+);

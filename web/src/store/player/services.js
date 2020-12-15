@@ -20,3 +20,7 @@ export const updatePlayer = (playerInfo) => axios
 
 export const getRating = () => axios
   .get('/rating', getHeaders()).then((x) => x.data);
+
+export const getCountries = () => axios
+    .get('https://restcountries.eu/rest/v2/all')
+    .then((x) => x.data);

@@ -64,10 +64,10 @@ const Store = () => {
         <Button
           name="Update"
           onClick={() => updatePlayer({
-            country: 'Russia',
+            country: 'Russian Federation',
             experience: 100,
-            login: 'Cherkasik3',
-            email: 'cherkasik@gmail.com',
+            login: 'peachy',
+            email: 'peach@gmail.com',
           })}
         />
         {JSON.stringify(player)}

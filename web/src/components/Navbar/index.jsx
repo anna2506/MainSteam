@@ -8,36 +8,36 @@ import * as userActions from '../../store/player/actions';
 import useActions from '../../helpers/useActions';
 
 const Navbar = ({bg, linkColor}) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const isLoggedIn = useSelector((state) => userSelectors.isLoggedIn(state));
-  const logOut = useActions(userActions.logout);
-  return (
-      <>
-        <RegisterModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-        <Styled.Header bg={bg}>
-          <Styled.Container>
-            {isLoggedIn
-                ? (
-                    <Styled.LoginButton linkColor={linkColor} onClick={logOut}>
-                      LOGOUT
-                    </Styled.LoginButton>
-                )
-                : (
-                    <Styled.LoginButton linkColor={linkColor} onClick={() => setModalOpen(true)}>
-                      LOGIN
-                    </Styled.LoginButton>
-                )}
-            <Styled.Ul>
-              <Styled.Li><Styled.StyledLink  linkColor={linkColor} to="/">HOME</Styled.StyledLink></Styled.Li>
-              <Styled.Li><Styled.StyledLink  linkColor={linkColor} to="/rating">RATING</Styled.StyledLink></Styled.Li>
-              <Styled.Li><Styled.StyledLink  linkColor={linkColor} to="/store">STORE</Styled.StyledLink></Styled.Li>
-              {isLoggedIn &&
-              <Styled.Li><Styled.StyledLink  linkColor={linkColor} to="/profile">PROFILE</Styled.StyledLink></Styled.Li>}
-            </Styled.Ul>
-          </Styled.Container>
-        </Styled.Header>
-      </>
-  );
+      const [modalOpen, setModalOpen] = useState(false);
+      const isLoggedIn = useSelector((state) => userSelectors.isLoggedIn(state));
+      const logOut = useActions(userActions.logout);
+      return (
+          <>
+            <RegisterModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+            <Styled.Header bg={bg}>
+              <Styled.Container>
+                {isLoggedIn
+                    ? (
+                        <Styled.LoginButton linkColor={linkColor} onClick={logOut}>
+                          LOGOUT
+                        </Styled.LoginButton>
+                    )
+                    : (
+                        <Styled.LoginButton linkColor={linkColor} onClick={() => setModalOpen(true)}>
+                          LOGIN
+                        </Styled.LoginButton>
+                    )}
+                <Styled.Ul>
+                  <Styled.Li><Styled.StyledLink linkColor={linkColor} to="/">HOME</Styled.StyledLink></Styled.Li>
+                  <Styled.Li><Styled.StyledLink linkColor={linkColor} to="/rating">RATING</Styled.StyledLink></Styled.Li>
+                  <Styled.Li><Styled.StyledLink linkColor={linkColor} to="/store">STORE</Styled.StyledLink></Styled.Li>
+                  {isLoggedIn &&
+                  <Styled.Li><Styled.StyledLink linkColor={linkColor} to="/profile">PROFILE</Styled.StyledLink></Styled.Li>}
+                </Styled.Ul>
+              </Styled.Container>
+            </Styled.Header>
+          </>
+      );
 };
 
 Navbar.propTypes = {

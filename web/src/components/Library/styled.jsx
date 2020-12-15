@@ -20,6 +20,7 @@ export const Card = styled.div`
 `;
 
 export const Image = styled.img`
+    border: .2em solid #fff;
     width: 50%;
 `;
 

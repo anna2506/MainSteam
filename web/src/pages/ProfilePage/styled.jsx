@@ -53,10 +53,35 @@ export const ProfileExtraInfo = styled.div`
     text-align: right;
 `;
 
-export const ProfileImage = styled.img`
+export const ImageDiv = styled.div`
     width: 25%;
-    border-radius: 50%;
-    border: 3px solid #FFCD48;
+    position: relative;
+`
+
+export const OverlayDiv = styled.div`
+    margin: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #fff;
+    &:hover {
+        opacity: .5;
+        cursor: pointer;
+    }
+`
+
+export const ProfileImage = styled.img`
+    width: 100%;
+    height: auto;
+    display: block;
+    border: .2em solid #fff;
 `;
 
 export const ProfileDescription = styled.div`
@@ -65,10 +90,21 @@ export const ProfileDescription = styled.div`
     flex-direction: column;
 `;
 
+export const PersonalInfoDiv = styled.div`
+    width: 55%;
+    display: flex;
+`
+
 export const Nickname = styled.p`
     font-size: 1.4rem;
     color: #fff;
 `;
+
+export const Flag = styled.img`
+    width: 10%;
+    align-self: center;
+    margin: 0 .5em;
+`
 
 export const Description = styled.p`
     width: 55%;
@@ -87,20 +123,24 @@ export const EditableArea = styled.textarea`
     resize: none;
     height: 100%;
     outline: none;
-    border: 1px solid #FFCD48;
+    border: 1px solid #fff;
+    padding: .5em;
 `
 
 export const SaveBtn = styled.button`
-    background: transparent;
+    background: white;
+    float: right;
+    padding: .3em;
+    margin: .7em 0;
     border: 0;
+    color: #0201C7;
+    transition: all 500ms ease;
     &:hover, focus {
-        color: #FFCD48;
+        background: rgba(131,131,227,1);
+        color: white;
+        box-shadow: inset 0 0 0 3px #8383E7;
         cursor: pointer;
     }
-    font-size: .8rem;
-    text-align: left;
-    max-width: max-content;
-    margin-top: .4em;
 `
 
 export const Level = styled.p`
@@ -108,13 +148,20 @@ export const Level = styled.p`
     text-align: right;
     margin-right: 0;
     color: #fff;
+    text-transform: uppercase;
 `;
 
 export const EditProfile = styled.button`
-    background: transparent;
+    background: white;
+    padding: .3em;
+    margin: .7em 0;
     border: 0;
+    color: #0201C7;
+    transition: all 500ms ease;
     &:hover, focus {
-        color: #FFCD48;
+        background: rgba(131,131,227,1);
+        color: white;
+        box-shadow: inset 0 0 0 3px #8383E7;
         cursor: pointer;
     }
 `;
@@ -123,9 +170,17 @@ export const Status = styled.p`
     font-size: 1.2rem;
     margin-bottom: 1.2em;
     color: #fff;
+    text-transform: uppercase;
 `;
 
 export const Info = styled.p`
     padding-bottom: 1em;
     color: #fff;
+    text-transform: uppercase;
 `;
+
+
+export const Option = styled.option`
+    color: #000;
+    width: 35%;
+`

@@ -8,3 +8,5 @@ export const getPlayerInfo = (state) => ({
 });
 
 export const getRating = (state) => state.player.rating;
+
+export const getCountries = (state) => state.player.countries;
