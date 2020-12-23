@@ -8,3 +8,10 @@ export const getPlayerInfo = (state) => ({
 });
 
 export const getRating = (state) => state.player.rating;
+
+export const getCountries = (state) => state.player.countries;
+
+export const getCountriesNames = (state) => {
+  const countries = [...state.player.countries];
+  return countries.map((x) => x.name);
+};

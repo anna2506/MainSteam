@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ReactComponent as Eye } from '../assets/eye-open.svg';
 import { ReactComponent as EyeClosed } from '../assets/eye-closed.svg';
+import CountryInput from './CountryInput';
 
 const Label = styled.label`
   text-align: left;
@@ -46,46 +47,62 @@ function TextInput(props) {
     value,
   } = props;
   const [passShow, setPassShow] = useState(false);
-  if (type === 'password') {
-    const inputType = passShow ? 'text' : 'password';
-    return (
-      <Wrapper>
-        <Label htmlFor={name}>
-          {name}
-        </Label>
-        <Input
-          id={name}
-          type={inputType}
-          onChange={onChange}
-          value={value}
-        />
-        {passShow
-          ? (
-            <PassShowButton type="button" onClick={() => setPassShow(false)}>
-              <Eye />
-            </PassShowButton>
-          )
-          : (
-            <PassShowButton type="button" onClick={() => setPassShow(true)}>
-              <EyeClosed />
-            </PassShowButton>
-          )}
-      </Wrapper>
-    );
+  switch (type) {
+    case 'password': {
+      const inputType = passShow ? 'text' : 'password';
+      return (
+        <Wrapper>
+          <Label htmlFor={name}>
+            {name}
+          </Label>
+          <Input
+            id={name}
+            type={inputType}
+            onChange={onChange}
+            value={value}
+          />
+          {passShow
+            ? (
+              <PassShowButton type="button" onClick={() => setPassShow(false)}>
+                <Eye />
+              </PassShowButton>
+            )
+            : (
+              <PassShowButton type="button" onClick={() => setPassShow(true)}>
+                <EyeClosed />
+              </PassShowButton>
+            )}
+        </Wrapper>
+      );
+    }
+    case 'country':
+      return (
+        <Wrapper>
+          <Label htmlFor={name}>
+            {name}
+          </Label>
+          <CountryInput
+            id={name}
+            onChange={onChange}
+            value={value}
+          />
+        </Wrapper>
+      );
+    default:
+      return (
+        <Wrapper>
+          <Label htmlFor={name}>
+            {name}
+          </Label>
+          <Input
+            id={name}
+            type={type}
+            onChange={onChange}
+            value={value}
+          />
+        </Wrapper>
+      );
   }
-  return (
-    <Wrapper>
-      <Label htmlFor={name}>
-        {name}
-      </Label>
-      <Input
-        id={name}
-        type={type}
-        onChange={onChange}
-        value={value}
-      />
-    </Wrapper>
-  );
 }
 
 TextInput.propTypes = {

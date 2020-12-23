@@ -15,10 +15,10 @@ export const logIn = (login, password) => (dispatch) => (
       });
   }));
 
-export const register = (login, email, password) => (dispatch) => (
+export const register = (login, email, password, country) => (dispatch) => (
   new Promise((resolve, reject) => {
     dispatch({ type: actionTypes.REGISTER_REQUEST });
-    services.register(login, email, password)
+    services.register(login, email, password, country)
       .then((data) => {
         dispatch({ type: actionTypes.REGISTER_SUCCESS, data });
         resolve();
@@ -72,6 +72,21 @@ export const getRating = () => (dispatch) => (
       })
       .catch((error) => {
         dispatch({ type: actionTypes.RATING_FAILURE, message: error.message });
+        reject();
+      });
+  }))
+);
+
+export const getCountries = () => (dispatch) => (
+  new Promise(((resolve, reject) => {
+    dispatch({ type: actionTypes.COUNTRIES_REQUEST });
+    services.getCountries()
+      .then((data) => {
+        dispatch({ type: actionTypes.COUNTRIES_SUCCESS, data });
+        resolve();
+      })
+      .catch((error) => {
+        dispatch({ type: actionTypes.COUNTRIES_FAILURE, message: error.message });
         reject();
       });
   }))

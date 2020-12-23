@@ -1,9 +1,9 @@
 import React from 'react';
+import axios from 'axios';
 import * as Styled from './styled';
 import Library from '../../components/Library';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import ProfileImage from '../../assets/ProfileImage.png';
 
 const ProfilePage = () => (
   <Styled.Content>
@@ -12,7 +12,7 @@ const ProfilePage = () => (
       <Styled.Container>
         <Styled.Main>
           <Styled.ProfileMainContent>
-            <Styled.ProfileImage src={ProfileImage} />
+            <Styled.ProfileImage src={`${axios.defaults.baseURL}/player/avatar/1`} />
             <Styled.ProfileDescription>
               <Styled.Nickname>Nickname</Styled.Nickname>
               <Styled.Description>Something...</Styled.Description>

@@ -1,15 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import useActions from '../helpers/useActions';
 import Layout from './Layout';
 import Button from '../components/Button';
-import * as GameActions from '../store/game/actions';
-import * as GameSelectors from '../store/game/selector';
-import * as PlayerActions from '../store/player/actions';
-import * as PlayerSelectors from '../store/player/selector';
-import * as PlayerGameActions from '../store/playerGame/actions';
-import * as PlayerGameSelectors from '../store/playerGame/selector';
+import * as gameActions from '../store/game/actions';
+import * as gameSelectors from '../store/game/selector';
+import * as playerActions from '../store/player/actions';
+import * as playerSelectors from '../store/player/selector';
+import * as playerGameActions from '../store/playerGame/actions';
+import * as playerGameSelectors from '../store/playerGame/selector';
 
 const Block = styled.div`
   width: 100%;
@@ -19,71 +18,54 @@ const Block = styled.div`
 `;
 
 const Store = () => {
-  // actions
-  const [
-    getGame,
-    getGames,
-    getPlayer,
-    updatePlayer,
-    getRating,
-    getPlayerGames,
-    updatePlayerGame,
-  ] = useActions([
-    GameActions.getGame,
-    GameActions.getGames,
-    PlayerActions.getPlayer,
-    PlayerActions.updatePlayer,
-    PlayerActions.getRating,
-    PlayerGameActions.getPlayerGames,
-    PlayerGameActions.updatePlayerGame,
-  ]);
+  const dispatch = useDispatch();
 
   // selectors
-  const game = useSelector(GameSelectors.getGame);
-  const games = useSelector(GameSelectors.getGames);
-  const player = useSelector(PlayerSelectors.getPlayerInfo);
-  const rating = useSelector(PlayerSelectors.getRating);
-  const playerGames = useSelector(PlayerGameSelectors.getPlayerGames);
+  const game = useSelector(gameSelectors.getGame);
+  const games = useSelector(gameSelectors.getGames);
+  const player = useSelector(playerSelectors.getPlayerInfo);
+  const rating = useSelector(playerSelectors.getRating);
+  const playerGames = useSelector(playerGameSelectors.getPlayerGames);
 
   return (
     <Layout color="#8383e3">
       <Block>
         GET /games/1
-        <Button name="Send" onClick={() => getGame(1)} />
+        <Button name="Send" onClick={() => dispatch(gameActions.getGame(1))} />
         {JSON.stringify(game)}
       </Block>
       <Block>
         GET /games
-        <Button name="Send" onClick={() => getGames()} />
+        <Button name="Send" onClick={() => dispatch(gameActions.getGames())} />
         {JSON.stringify(games)}
       </Block>
       <Block>
         GET /player
-        <Button name="Send" onClick={() => getPlayer()} />
+        <Button name="Send" onClick={() => dispatch(playerActions.getPlayer())} />
         PUT /player
         <Button
           name="Update"
-          onClick={() => updatePlayer({
+          onClick={() => dispatch(playerActions.updatePlayer({
             country: 'Russia',
             experience: 100,
             login: 'Cherkasik3',
             email: 'cherkasik@gmail.com',
-          })}
+          }))}
         />
         {JSON.stringify(player)}
       </Block>
       <Block>
         GET /rating
-        <Button name="Send" onClick={() => getRating()} />
+        <Button name="Send" onClick={() => dispatch(playerActions.getRating())} />
         {JSON.stringify(rating)}
       </Block>
       <Block>
         GET /playerGames
-        <Button name="Send" onClick={() => getPlayerGames()} />
+        <Button name="Send" onClick={() => dispatch(playerGameActions.getPlayerGames())} />
         POST /playerGames
         <Button
           name="Update"
-          onClick={() => updatePlayerGame({
+          onClick={() => dispatch(playerGameActions.updatePlayerGame({
             gameId: 1,
             timeSpent: 100,
             highScore: 0,
@@ -93,7 +75,7 @@ const Store = () => {
             beat700: false,
             beat1000: false,
             beat10000: false,
-          })}
+          }))}
         />
         {JSON.stringify(playerGames)}
       </Block>

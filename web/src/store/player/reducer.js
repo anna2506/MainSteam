@@ -1,12 +1,14 @@
 import actionTypes from './actionTypes';
 
 const initialState = {
+  id: 0,
   loggedIn: false,
   login: null,
   email: null,
   country: null,
   experience: 0,
   rating: [],
+  countries: [],
   errorMessage: '',
 };
 
@@ -23,6 +25,7 @@ export default function (state = initialState, action) {
     case actionTypes.PLAYER_REQUEST:
     case actionTypes.UPDATE_PLAYER_REQUEST:
     case actionTypes.RATING_REQUEST:
+    case actionTypes.COUNTRIES_REQUEST:
       return {
         ...state,
         errorMessage: '',
@@ -34,7 +37,7 @@ export default function (state = initialState, action) {
     }
     case actionTypes.LOGOUT: {
       localStorage.clear();
-      return { ...initialState };
+      return initialState;
     }
     case actionTypes.PLAYER_SUCCESS:
     case actionTypes.UPDATE_PLAYER_SUCCESS:
@@ -50,6 +53,7 @@ export default function (state = initialState, action) {
     case actionTypes.REGISTER_FAILURE:
     case actionTypes.UPDATE_PLAYER_FAILURE:
     case actionTypes.RATING_FAILURE:
+    case actionTypes.COUNTRIES_FAILURE:
       return {
         ...state,
         errorMessage: action.message,
@@ -58,6 +62,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         rating: [...action.data],
+      };
+    case actionTypes.COUNTRIES_SUCCESS:
+      return {
+        ...state,
+        countries: [...action.data],
       };
     default:
       return state;

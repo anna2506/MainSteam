@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Styled from './styled';
 import RegisterModal from '../RegisterModal';
 import * as userSelectors from '../../store/player/selector';
 import * as userActions from '../../store/player/actions';
-import useActions from '../../helpers/useActions';
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
-  const isLoggedIn = useSelector((state) => userSelectors.isLoggedIn(state));
-  const logOut = useActions(userActions.logout);
+  const isLoggedIn = useSelector(userSelectors.isLoggedIn);
   return (
     <>
       <RegisterModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
@@ -17,7 +16,7 @@ const Navbar = () => {
         <Styled.Container>
           {isLoggedIn
             ? (
-              <Styled.LoginButton onClick={logOut}>
+              <Styled.LoginButton onClick={() => dispatch(userActions.logout())}>
                 LOGOUT
               </Styled.LoginButton>
             )

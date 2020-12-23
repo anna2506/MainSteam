@@ -13,6 +13,12 @@ const appReducer = combineReducers({
   playerGame,
 });
 
-const rootReducer = (state, action) => appReducer(state, action);
+const rootReducer = (state, action) => {
+  if (action.type === 'LOGOUT') {
+    // eslint-disable-next-line no-param-reassign
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
 
 export default rootReducer;

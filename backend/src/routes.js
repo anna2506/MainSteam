@@ -1,7 +1,10 @@
+const path = require('path');
 const dbHelper = require('./databaseHelper');
 const errorMessages = require('./errorMessages');
 const authHelper = require('./authHelper');
 const tokenHelper = require('./token');
+
+const appRoot = path.join(path.resolve(__dirname));
 
 const getPlayerInfo = async (token) => {
   const player = await dbHelper.getPlayerInfo(token);
@@ -155,7 +158,7 @@ module.exports = (app) => {
       email,
     } = request.body;
 
-    if (await dbHelper.getPlayerByLogin(login)) {
+    if (login !== player.login && await dbHelper.getPlayerByLogin(login)) {
       return response.status(500).json({ message: errorMessages.loginDuplicate });
     }
 
@@ -174,5 +177,15 @@ module.exports = (app) => {
     }
     const rating = await dbHelper.getRating();
     return response.json([...rating]);
+  });
+
+  app.get('/player/avatar/:id', async (request, response) => {
+    const { id } = request.params;
+    return response.sendFile(path.join(appRoot, `/playerAvatar/${id}.png`));
+  });
+
+  app.get('/game/:name/image/:number', async (request, response) => {
+    const { name, number } = request.params;
+    return response.sendFile(path.join(appRoot, `/gameImages/${name}/${number}.png`));
   });
 };
