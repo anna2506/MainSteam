@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import Layout from './Layout';
 import Button from '../components/Button';
+import * as gameSelectors from '../store/game/selector';
+import * as gameActions from '../store/game/actions';
+import * as playerGameActions from '../store/playerGame/actions';
+import * as playerGameSelectors from '../store/playerGame/selector';
+import Game from '../components/Game';
 
 const Content = styled.div`
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   height: 100%;
@@ -12,8 +21,14 @@ const Content = styled.div`
   justify-content: space-around;
   flex: 1;
   padding: 20px 0 0;
-  img { padding: 10px; }
   button:hover { background-color: #0201c7; }
+`;
+
+const Image = styled.img`
+  padding: 10px;
+  width: 100%;
+  ${(props) => !props.show && 'display: none;'}
+  cursor: pointer;
 `;
 
 const Description = styled.p`
@@ -23,20 +38,65 @@ const Description = styled.p`
   margin: 20px;
 `;
 
-const Store = () => (
-  <Layout color="#8383e3">
-    <Content>
-      <img src="" alt=" " />
-      <Button name="Play" />
-    </Content>
-    <Description>
-      {'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut hendrerit mi euismod enim aliquam, ac eleifend nisi tincidunt. Etiam aliquam, sapien at cursus eleifend, metus mauris sagittis turpis, venenatis viverra odio sem sit amet ex. Suspendisse vitae velit accumsan, semper sapien eget, interdum turpis. Etiam faucibus elit sapien, id egestas libero mattis non. Vestibulum eu dapibus urna. Quisque volutpat lorem in augue vehicula aliquet. Aenean hendrerit tortor ligula, congue fringilla odio sodales at. Nullam luctus enim ut dignissim convallis. Nullam quis metus nec lorem cursus mollis ac eu lorem. Integer cursus erat eros, ac aliquet ante iaculis sed. Pellentesque porttitor vulputate diam vitae dapibus. Sed ac tellus eget arcu maximus mollis. Quisque id ultrices leo.\n'
-      + 'Vivamus fringilla orci mauris, sed fermentum urna pellentesque ut. Vivamus commodo mi nec neque aliquam, sed gravida dui feugiat. Nulla et metus id felis ultrices varius. Nullam non ante in sapien finibus interdum. Quisque tincidunt enim ac massa suscipit, sed lacinia enim tincidunt. Nunc tristique maximus elit eget blandit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi laoreet gravida purus sit amet ultricies. Donec in nibh id orci mollis tincidunt.\n'
-      + 'Fusce nec purus erat. Curabitur eu erat ante. Nullam mollis consequat velit, condimentum fringilla nibh placerat at. Aliquam hendrerit vehicula ultrices. Donec gravida nibh leo, tempus finibus mi efficitur at. Vestibulum quam nisl, mattis vel convallis nec, iaculis quis diam. Cras sed ipsum magna. Ut mattis orci id laoreet feugiat. Vestibulum luctus ante nec ante interdum lacinia. Aliquam auctor sit amet dui eget volutpat. Suspendisse non lorem feugiat, fringilla ex quis, convallis tortor. Maecenas eu nisi condimentum mauris maximus condimentum. In hendrerit malesuada nisl luctus iaculis.\n'
-      + 'Maecenas semper porta gravida. Phasellus mauris nulla, tempor at nulla a, porta iaculis augue. In erat turpis, tincidunt nec turpis sit amet, feugiat porta lectus. Morbi mattis euismod interdum. Nullam egestas nisi nulla, at molestie tortor ullamcorper eget. Donec suscipit ante sed elit porta sagittis. Vivamus posuere dignissim ligula non consectetur. Etiam sagittis lobortis facilisis. Quisque vitae ipsum elit. Aliquam ut nisi nec purus vestibulum mattis.\n'
-      + 'Cras cursus finibus tellus, ut tristique sapien ultrices non. Proin vitae porttitor est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam erat volutpat. Vestibulum placerat hendrerit sollicitudin. Aliquam laoreet, quam quis feugiat mollis, ex ligula posuere tortor, pellentesque ornare leo ipsum vitae nisl. Cras bibendum elit eget dictum vulputate. Mauris eget lacus turpis. Praesent odio sem, porta id luctus nec, mollis non justo. Suspendisse potenti.\n'}
-    </Description>
-  </Layout>
-);
+function Store(props) {
+  // TODO: update playerGame
+  // TODO: gameOver screen + handleGameOver
+  const { match } = props;
+  const { gameId } = match.params;
+  const images = [0, 1, 2];
+  const [imageToShow, setImageToShow] = useState(1);
+  const [play, setPlay] = useState(false);
+
+  const dispatch = useDispatch();
+  const game = useSelector(gameSelectors.getGame);
+  const playerGame = useSelector((state) => playerGameSelectors.getPlayerGame(state, gameId));
+
+  useEffect(() => {
+    dispatch(gameActions.getGame(gameId));
+    dispatch(playerGameActions.getPlayerGames());
+  }, [dispatch, gameId]);
+
+  if (play) {
+    return (
+      <Layout color="#8383e3">
+        <Game
+          name={game.name}
+          onClose={() => setPlay(false)}
+          highScore={playerGame.highScore}
+        />
+      </Layout>
+    );
+  }
+
+  return (
+    <Layout color="#8383e3">
+      <Content>
+        {game.name && images.map((x) => (
+          <Image
+            src={`${axios.defaults.baseURL}/game/${game.name}/image/${x + 1}`}
+            alt=" "
+            key={x}
+            onClick={() => setImageToShow((imageToShow + 1) % 3)}
+            show={imageToShow === x}
+          />
+        ))}
+      </Content>
+      <Description>
+        {game.description}
+      </Description>
+      <Content>
+        <Button name="Play" onClick={() => setPlay(true)} />
+      </Content>
+    </Layout>
+  );
+}
+
+Store.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      gameId: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default Store;

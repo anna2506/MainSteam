@@ -41,7 +41,7 @@ const SvgWrapper = styled.div`
 `;
 
 const GameCard = ({ imageSrc, isLocked }) => (
-  <Wrapper to="/store/1">
+  <Wrapper to={isLocked ? '/store' : '/store/1'}>
     <img src={imageSrc} alt=" " />
     <SvgWrapper>
       {isLocked ? <LockSvg /> : <MagnifierSvg />}

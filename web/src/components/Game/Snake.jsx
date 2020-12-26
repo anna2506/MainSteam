@@ -4,7 +4,7 @@ import React, {
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const STEP = 10;
+const STEP = 5;
 
 const Dot = styled.div`
   position: absolute;

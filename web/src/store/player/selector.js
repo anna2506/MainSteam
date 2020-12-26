@@ -19,3 +19,5 @@ export const getCountriesNames = (state) => {
 export const getLevel = (state) => state.player.level;
 
 export const getPlayerName = (state) => state.player.login;
+
+export const getPlayerId = (state) => state.player.id;

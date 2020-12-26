@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { ReactComponent as CrossSvg } from '../../assets/cross.svg';
 import Snake from './Snake';
 
 const GameField = styled.div`
@@ -55,9 +57,10 @@ const GameArea = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  background-color: white;
 `;
 
-const Text = styled.div`
+const Score = styled.div`
   position: absolute;
   color: black;
   top: -50px;
@@ -66,7 +69,23 @@ const Text = styled.div`
   font-size: 25pt;
 `;
 
-function Game() {
+const HighScore = styled(Score)`
+  top: unset;
+  bottom: -50px;
+`;
+
+const Cross = styled(CrossSvg)`
+  fill: white;
+  cursor: pointer;
+  :hover { fill: #ffec00; }
+  margin-top: 5px;
+  position: absolute;
+  right: 0;
+  top: -50px;
+`;
+
+function Game(props) {
+  const { name, onClose, highScore } = props;
   const [configuration, setConfiguration] = useState(null);
   const [score, setScore] = useState(0);
   const difficulties = {
@@ -100,20 +119,30 @@ function Game() {
   return (
     <>
       <GameField>
-        <Text>
+        <Score>
           Score:
           {' '}
           {score}
-        </Text>
+        </Score>
+        <HighScore>
+          High Score:
+          {' '}
+          {highScore}
+        </HighScore>
+        <Cross onClick={onClose} />
         {configuration
           ? (
             <GameArea>
-              <Snake
-                config={configuration}
-                onGameOver={() => setConfiguration(null)}
-                onScoreChanged={setScore}
-                score={score}
-              />
+              {name === 'Snake'
+                ? (
+                  <Snake
+                    config={configuration}
+                    onGameOver={() => setConfiguration(null)}
+                    onScoreChanged={setScore}
+                    score={score}
+                  />
+                )
+                : 'Under development'}
             </GameArea>
           )
           : (
@@ -134,5 +163,11 @@ function Game() {
     </>
   );
 }
+
+Game.propTypes = {
+  name: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  highScore: PropTypes.number.isRequired,
+};
 
 export default Game;
