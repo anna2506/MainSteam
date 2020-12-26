@@ -10,12 +10,14 @@ import Store from './pages/Store';
 import Game from './pages/Game';
 import Test from './pages/Test';
 import PrivateRoute from './components/PrivateRoute';
+import Snake from './components/Game';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={routes.mainPage} component={Main} />
+        <Route exact path="/snake" component={Snake} />
         <PrivateRoute exact path={routes.profilePage} component={Profile} />
         <PrivateRoute exact path={routes.rating} component={Rating} />
         <PrivateRoute exact path={routes.store} component={Store} />
