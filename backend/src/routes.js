@@ -188,4 +188,9 @@ module.exports = (app) => {
     const { name, number } = request.params;
     return response.sendFile(path.join(appRoot, `/gameImages/${name}/${number}.png`));
   });
+
+  app.get('/game/:name/image/logo', async (request, response) => {
+    const { name } = request.params;
+    return response.sendFile(path.join(appRoot, `/gameImages/${name}/logo.png`));
+  });
 };

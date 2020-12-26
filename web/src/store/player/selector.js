@@ -15,3 +15,7 @@ export const getCountriesNames = (state) => {
   const countries = [...state.player.countries];
   return countries.map((x) => x.name);
 };
+
+export const getLevel = (state) => state.player.level;
+
+export const getPlayerName = (state) => state.player.login;

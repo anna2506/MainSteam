@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Layout from './Layout';
-import SnakeGameSvg from '../assets/snake-game.png';
 import Button from '../components/Button';
 
 const Content = styled.div`
@@ -27,7 +26,7 @@ const Description = styled.p`
 const Store = () => (
   <Layout color="#8383e3">
     <Content>
-      <img src={SnakeGameSvg} alt=" " />
+      <img src="" alt=" " />
       <Button name="Play" />
     </Content>
     <Description>

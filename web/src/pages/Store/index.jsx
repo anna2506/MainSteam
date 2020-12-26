@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import Layout from '../Layout';
 import GameCard from './GameCard';
-import SnakeGameSvg from '../../assets/snake-game.png';
-import PacmanGameSvg from '../../assets/pacman-game.png';
+import * as playerSelectors from '../../store/player/selector';
+import * as gameSelectors from '../../store/game/selector';
+import * as playerActions from '../../store/player/actions';
+import * as gameActions from '../../store/game/actions';
 
 const Content = styled.div`
   display: flex;
@@ -22,19 +26,38 @@ const WelcomeText = styled.p`
   text-align: center;
 `;
 
-const Store = () => (
-  <Layout color="#8383e3">
-    <WelcomeText>
-      {/* TODO: get username from state */}
-      Hello, Username! Would you like to play some game today?
-    </WelcomeText>
-    <Content>
-      <GameCard imageSrc={SnakeGameSvg} isLocked={false} />
-      <GameCard imageSrc={SnakeGameSvg} isLocked />
-      <GameCard imageSrc={PacmanGameSvg} isLocked />
-      <GameCard imageSrc={PacmanGameSvg} isLocked={false} />
-    </Content>
-  </Layout>
-);
+function Store() {
+  const dispatch = useDispatch();
+  const login = useSelector(playerSelectors.getPlayerName);
+  const level = useSelector(playerSelectors.getLevel);
+  const games = useSelector(gameSelectors.getGames);
+
+  useEffect(() => {
+    dispatch(playerActions.getPlayer());
+    dispatch(gameActions.getGames());
+  }, [dispatch]);
+
+  return (
+    <Layout color="#8383e3">
+      <WelcomeText>
+        Hello,
+        {' '}
+        {login}
+        ! Your level is
+        {' '}
+        {level}
+      </WelcomeText>
+      <Content>
+        {games.map((game) => (
+          <GameCard
+            key={game.id}
+            imageSrc={`${axios.defaults.baseURL}/game/${game.name}/image/logo`}
+            isLocked={game.id > level}
+          />
+        ))}
+      </Content>
+    </Layout>
+  );
+}
 
 export default Store;

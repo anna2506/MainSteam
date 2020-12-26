@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Styled from './styled';
 import RegisterModal from '../RegisterModal';
-import * as userSelectors from '../../store/player/selector';
-import * as userActions from '../../store/player/actions';
+import * as playerSelectors from '../../store/player/selector';
+import * as playerActions from '../../store/player/actions';
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
-  const isLoggedIn = useSelector(userSelectors.isLoggedIn);
+  const isLoggedIn = useSelector(playerSelectors.isLoggedIn);
+  const player = useSelector(playerSelectors.getPlayerInfo);
+
+  useEffect(() => {
+    dispatch(playerActions.getPlayer());
+  }, [dispatch]);
   return (
     <>
       <RegisterModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
@@ -16,7 +21,7 @@ const Navbar = () => {
         <Styled.Container>
           {isLoggedIn
             ? (
-              <Styled.LoginButton onClick={() => dispatch(userActions.logout())}>
+              <Styled.LoginButton onClick={() => dispatch(playerActions.logout())}>
                 LOGOUT
               </Styled.LoginButton>
             )
@@ -29,7 +34,14 @@ const Navbar = () => {
             <Styled.Li><Styled.StyledLink to="/">HOME</Styled.StyledLink></Styled.Li>
             <Styled.Li><Styled.StyledLink to="/rating">RATING</Styled.StyledLink></Styled.Li>
             <Styled.Li><Styled.StyledLink to="/store">STORE</Styled.StyledLink></Styled.Li>
-            <Styled.Li><Styled.StyledLink to="/ReduxTest">REDUX TEST</Styled.StyledLink></Styled.Li>
+            {player.login
+            && (
+            <Styled.Li>
+              <Styled.StyledLink to="/profile">
+                {player.login}
+              </Styled.StyledLink>
+            </Styled.Li>
+            )}
           </Styled.Ul>
         </Styled.Container>
       </Styled.Header>
