@@ -9,6 +9,8 @@ import * as gameSelectors from '../store/game/selector';
 import * as gameActions from '../store/game/actions';
 import * as playerGameActions from '../store/playerGame/actions';
 import * as playerGameSelectors from '../store/playerGame/selector';
+import * as playerActions from '../store/player/actions';
+import * as playerSelectors from '../store/player/selector';
 import Game from '../components/Game';
 
 const Content = styled.div`
@@ -38,9 +40,7 @@ const Description = styled.p`
   margin: 20px;
 `;
 
-function Store(props) {
-  // TODO: update playerGame
-  // TODO: gameOver screen + handleGameOver
+function GamePage(props) {
   const { match } = props;
   const { gameId } = match.params;
   const images = [0, 1, 2];
@@ -50,11 +50,57 @@ function Store(props) {
   const dispatch = useDispatch();
   const game = useSelector(gameSelectors.getGame);
   const playerGame = useSelector((state) => playerGameSelectors.getPlayerGame(state, gameId));
+  const player = useSelector(playerSelectors.getPlayerInfo);
 
   useEffect(() => {
+    dispatch(playerActions.getPlayer());
     dispatch(gameActions.getGame(gameId));
     dispatch(playerGameActions.getPlayerGames());
   }, [dispatch, gameId]);
+
+  const handleGameOver = (score, timeSpent) => {
+    const newPlayerGame = {
+      gameId: parseInt(gameId, 10),
+      timeSpent: playerGame.timeSpent + timeSpent,
+      highScore: score > playerGame.highScore ? score : playerGame.highScore,
+      beat100: score >= 100,
+      beat200: score >= 200,
+      beat400: score >= 400,
+      beat700: score >= 700,
+      beat1000: score >= 1000,
+      beat10000: score >= 10000,
+    };
+    if (score > playerGame.highScore) {
+      let experienceToAdd = 0;
+      if (playerGame.highScore < 100 && score >= 100) {
+        experienceToAdd += 100;
+      }
+      if (playerGame.highScore < 200 && score >= 200) {
+        experienceToAdd += 200;
+      }
+      if (playerGame.highScore < 400 && score >= 400) {
+        experienceToAdd += 400;
+      }
+      if (playerGame.highScore < 700 && score >= 700) {
+        experienceToAdd += 700;
+      }
+      if (playerGame.highScore < 1000 && score >= 1000) {
+        experienceToAdd += 1000;
+      }
+      if (playerGame.highScore < 10000 && score >= 10000) {
+        experienceToAdd += 10000;
+      }
+      if (experienceToAdd !== 0) {
+        dispatch(playerActions.updatePlayer({
+          login: player.login,
+          experience: player.experience + experienceToAdd,
+          email: player.email,
+          country: player.country,
+        }));
+      }
+    }
+    dispatch(playerGameActions.updatePlayerGame(newPlayerGame));
+  };
 
   if (play) {
     return (
@@ -63,6 +109,7 @@ function Store(props) {
           name={game.name}
           onClose={() => setPlay(false)}
           highScore={playerGame.highScore}
+          onGameOver={handleGameOver}
         />
       </Layout>
     );
@@ -91,7 +138,7 @@ function Store(props) {
   );
 }
 
-Store.propTypes = {
+GamePage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       gameId: PropTypes.string.isRequired,
@@ -99,4 +146,4 @@ Store.propTypes = {
   }).isRequired,
 };
 
-export default Store;
+export default GamePage;

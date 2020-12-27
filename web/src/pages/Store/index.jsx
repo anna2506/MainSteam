@@ -53,6 +53,7 @@ function Store() {
             key={game.id}
             imageSrc={`${axios.defaults.baseURL}/game/${game.name}/image/logo`}
             isLocked={game.id > level}
+            gameId={game.id}
           />
         ))}
       </Content>

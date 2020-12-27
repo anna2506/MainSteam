@@ -20,9 +20,9 @@ export default function (state = initialState, action) {
       };
     case actionTypes.UPDATE_PLAYER_GAMES_SUCCESS: {
       const newPlayerGames = [...state.playerGames];
-      newPlayerGames.map((x) => {
+      state.playerGames.map((x, index) => {
         if (x.gameId === action.data.gameId) {
-          return action.data;
+          newPlayerGames[index] = action.data;
         }
         return x;
       });

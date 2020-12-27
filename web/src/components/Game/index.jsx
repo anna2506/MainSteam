@@ -67,6 +67,8 @@ const Score = styled.div`
   left: 50%;
   transform: translate(-50%);
   font-size: 25pt;
+  width: 100%;
+  text-align: center;
 `;
 
 const HighScore = styled(Score)`
@@ -84,10 +86,28 @@ const Cross = styled(CrossSvg)`
   top: -50px;
 `;
 
+const GameOver = styled(ChooseDifficulty)`
+  font-size: 25pt;
+`;
+
+const ChooseButton = styled(DifficultyButton)`
+  background-color: blueviolet;
+  color: white;
+  :hover {
+    
+  }
+`;
+
 function Game(props) {
-  const { name, onClose, highScore } = props;
+  const {
+    name,
+    onClose,
+    highScore,
+    onGameOver,
+  } = props;
   const [configuration, setConfiguration] = useState(null);
   const [score, setScore] = useState(0);
+  const [start, setStart] = useState(new Date());
   const difficulties = {
     easy: {
       multiplier: 0.5,
@@ -112,8 +132,16 @@ function Game(props) {
   };
 
   const onConfigurationChange = (value) => {
+    setStart(new Date());
     setScore(0);
     setConfiguration(value);
+  };
+
+  const handleGameOver = () => {
+    const end = new Date();
+    setConfiguration('GameOver');
+    const timeSpent = Math.floor((end - start) / 60000);
+    onGameOver(score, timeSpent);
   };
 
   return (
@@ -130,35 +158,47 @@ function Game(props) {
           {highScore}
         </HighScore>
         <Cross onClick={onClose} />
-        {configuration
+        {/* eslint-disable-next-line no-nested-ternary */}
+        {configuration === 'GameOver'
           ? (
-            <GameArea>
-              {name === 'Snake'
-                ? (
-                  <Snake
-                    config={configuration}
-                    onGameOver={() => setConfiguration(null)}
-                    onScoreChanged={setScore}
-                    score={score}
-                  />
-                )
-                : 'Under development'}
-            </GameArea>
+            <GameOver>
+              Oops... Looks like you died, sorry to hear that :(
+              <ChooseButton
+                onClick={() => setConfiguration(null)}
+              >
+                Try again
+              </ChooseButton>
+            </GameOver>
           )
-          : (
-            <ChooseDifficulty>
-              Choose the difficulty that matches you
-              {Object.entries(difficulties)
-                .map((x) => (
-                  <DifficultyButton
-                    onClick={() => onConfigurationChange({ ...x[1] })}
-                    key={x[0]}
-                  >
-                    {x[0]}
-                  </DifficultyButton>
-                ))}
-            </ChooseDifficulty>
-          )}
+          : (configuration
+            ? (
+              <GameArea>
+                {name === 'Snake'
+                  ? (
+                    <Snake
+                      config={configuration}
+                      onGameOver={handleGameOver}
+                      onScoreChanged={setScore}
+                      score={score}
+                    />
+                  )
+                  : 'Under development'}
+              </GameArea>
+            )
+            : (
+              <ChooseDifficulty>
+                Choose the difficulty that matches you
+                {Object.entries(difficulties)
+                  .map((x) => (
+                    <DifficultyButton
+                      onClick={() => onConfigurationChange({ ...x[1] })}
+                      key={x[0]}
+                    >
+                      {x[0]}
+                    </DifficultyButton>
+                  ))}
+              </ChooseDifficulty>
+            ))}
       </GameField>
     </>
   );
@@ -168,6 +208,7 @@ Game.propTypes = {
   name: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
   highScore: PropTypes.number.isRequired,
+  onGameOver: PropTypes.func.isRequired,
 };
 
 export default Game;

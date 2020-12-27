@@ -32,7 +32,8 @@ function Register(props) {
   const onSubmit = (event) => {
     event.preventDefault();
     if (login && password && password2 && email && password === password2) {
-      dispatch(playerActions.register(login, email, password, country)).then(() => closeModal());
+      dispatch(playerActions.register(login, email, password, country))
+        .then(() => closeModal());
     } else if (password !== password2) {
       // eslint-disable-next-line no-console
       console.error('Пароли не совпадают');

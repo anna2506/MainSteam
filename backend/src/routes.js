@@ -95,18 +95,23 @@ module.exports = (app) => {
     }
     const playerGames = await dbHelper.getPlayerGames(player.id);
     if (playerGames) {
-      playerGames.map((playerGame) => ({
-        gameId: playerGame.game_id,
-        timeSpent: playerGame.time_spent,
-        highScore: playerGame.high_score,
-        beat100: playerGame.beat_100,
-        beat200: playerGame.beat_200,
-        beat400: playerGame.beat_400,
-        beat700: playerGame.beat_700,
-        beat1000: playerGame.beat_1000,
-        beat10000: playerGame.beat_10000,
-      }));
-      return response.json([...playerGames]);
+      const playerGamesToSend = [];
+      playerGames.forEach((playerGame) => {
+        const playerGameToSend = {
+          gameId: playerGame.game_id,
+          timeSpent: playerGame.time_spent,
+          highScore: playerGame.high_score,
+          beat100: playerGame.beat_100,
+          beat200: playerGame.beat_200,
+          beat400: playerGame.beat_400,
+          beat700: playerGame.beat_700,
+          beat1000: playerGame.beat_1000,
+          beat10000: playerGame.beat_10000,
+        };
+        playerGamesToSend.push(playerGameToSend);
+        return playerGame;
+      });
+      return response.json(playerGamesToSend);
     }
     return response.json([]);
   });

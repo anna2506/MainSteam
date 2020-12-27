@@ -12,8 +12,10 @@ const Navbar = () => {
   const player = useSelector(playerSelectors.getPlayerInfo);
 
   useEffect(() => {
-    dispatch(playerActions.getPlayer());
-  }, [dispatch]);
+    if (isLoggedIn) {
+      dispatch(playerActions.getPlayer());
+    }
+  }, [dispatch, isLoggedIn]);
   return (
     <>
       <RegisterModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />

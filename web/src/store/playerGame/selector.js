@@ -1,7 +1,8 @@
 import * as playerSelectors from '../player/selector';
 
 export const getPlayerGame = (state, gameId) => {
-  const playerGame = state.playerGame.playerGames.find((x) => x.gameId === gameId);
+  const playerGame = state.playerGame.playerGames
+    .find((x) => x.gameId === parseInt(gameId, 10));
   if (playerGame) {
     return playerGame;
   }
