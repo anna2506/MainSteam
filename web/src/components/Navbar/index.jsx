@@ -6,7 +6,7 @@ import RegisterModal from '../RegisterModal';
 import * as playerSelectors from '../../store/player/selector';
 import * as playerActions from '../../store/player/actions';
 
-const Navbar = ({bg, linkColor}) => {
+const Navbar = ({ bg, linkColor }) => {
   const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
   const isLoggedIn = useSelector(playerSelectors.isLoggedIn);
@@ -24,7 +24,10 @@ const Navbar = ({bg, linkColor}) => {
         <Styled.Container>
           {isLoggedIn
             ? (
-              <Styled.LoginButton linkColor={linkColor} onClick={() => dispatch(playerActions.logout())}>
+              <Styled.LoginButton
+                linkColor={linkColor}
+                onClick={() => dispatch(playerActions.logout())}
+              >
                 LOGOUT
               </Styled.LoginButton>
             )
@@ -39,11 +42,11 @@ const Navbar = ({bg, linkColor}) => {
             <Styled.Li><Styled.StyledLink linkColor={linkColor} to="/store">STORE</Styled.StyledLink></Styled.Li>
             {player.login
             && (
-            <Styled.Li>
-              <Styled.StyledLink linkColor={linkColor} to="/profile">
-                {player.login}
-              </Styled.StyledLink>
-            </Styled.Li>
+              <Styled.Li>
+                <Styled.StyledLink linkColor={linkColor} to="/profile">
+                  {player.login}
+                </Styled.StyledLink>
+              </Styled.Li>
             )}
           </Styled.Ul>
         </Styled.Container>
@@ -53,13 +56,13 @@ const Navbar = ({bg, linkColor}) => {
 };
 
 Navbar.propTypes = {
-    bg: PropTypes.string,
-    linkColor: PropTypes.string,
-}
+  bg: PropTypes.string,
+  linkColor: PropTypes.string,
+};
 
 Navbar.defaultProps = {
-    bg: "linear-gradient(180deg, #C87D37 22.92%, #FFAD64 100%)",
-    linkColor: "#1d1d1d",
-}
+  bg: 'linear-gradient(180deg, #C87D37 22.92%, #FFAD64 100%)',
+  linkColor: '#1d1d1d',
+};
 
 export default Navbar;

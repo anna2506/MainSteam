@@ -1,4 +1,8 @@
 {
     "extends": ["react-app", "airbnb", "plugin:jsx-a11y/recommended"],
-    "plugins": ["jsx-a11y"]
+    "plugins": ["jsx-a11y"],
+    "rules": {
+        "linebreak-style": ["error", "windows"],
+        "object-shorthand": ["error", "always", { "avoidQuotes": true }]
+    }
 }

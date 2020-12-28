@@ -56,7 +56,7 @@ export const ProfileExtraInfo = styled.div`
 export const ImageDiv = styled.div`
     width: 25%;
     position: relative;
-`
+`;
 
 export const OverlayDiv = styled.div`
     margin: 0;
@@ -75,7 +75,7 @@ export const OverlayDiv = styled.div`
         opacity: .5;
         cursor: pointer;
     }
-`
+`;
 
 export const ProfileImage = styled.img`
     width: 100%;
@@ -93,7 +93,7 @@ export const ProfileDescription = styled.div`
 export const PersonalInfoDiv = styled.div`
     width: 55%;
     display: flex;
-`
+`;
 
 export const Nickname = styled.p`
     font-size: 1.4rem;
@@ -105,13 +105,13 @@ export const InputNickname = styled.input`
     font-family: inherit;
     font-size: 1.4rem;
     
-`
+`;
 
 export const Flag = styled.img`
     width: 10%;
     align-self: center;
     margin: 0 .5em;
-`
+`;
 
 export const Description = styled.p`
     width: 55%;
@@ -132,7 +132,7 @@ export const EditableArea = styled.textarea`
     outline: none;
     border: 1px solid #fff;
     padding: .5em;
-`
+`;
 
 export const SaveBtn = styled.button`
     background: white;
@@ -148,7 +148,7 @@ export const SaveBtn = styled.button`
         box-shadow: inset 0 0 0 3px #8383E7;
         cursor: pointer;
     }
-`
+`;
 
 export const Level = styled.p`
     font-size: 1.4rem;
@@ -186,8 +186,7 @@ export const Info = styled.p`
     text-transform: uppercase;
 `;
 
-
 export const Option = styled.option`
     color: #000;
     width: 35%;
-`
+`;
