@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import TextInput from '../TextInput';
 import Button from '../Button';
-import useActions from '../../helpers/useActions';
 import * as playerActions from '../../store/player/actions';
 
 const ButtonWrapper = styled.div`
@@ -21,16 +21,18 @@ const Form = styled.form`
 `;
 
 function LogIn(props) {
+  const dispatch = useDispatch();
   const { closeModal } = props;
-  const [logIn] = useActions([playerActions.logIn]);
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
   const onSubmit = (event) => {
     event.preventDefault();
-    if (login && password) logIn(login, password).then(() => closeModal());
-    // eslint-disable-next-line no-console
-    else console.error('Логин или пароль пустые');
+    if (login && password) {
+      dispatch(playerActions.logIn(login, password))
+        .then(() => closeModal());
+      // eslint-disable-next-line no-console
+    } else console.error('Логин или пароль пустые');
   };
 
   return (

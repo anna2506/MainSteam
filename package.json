@@ -5,9 +5,12 @@
     "husky": "^4.3.0",
     "lerna": "^3.22.1"
   },
+  "scripts": {
+    "lint": "lerna run lint --npm-client=yarn"
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "lerna run lint-staged --npm-client=yarn && cross-env CI=true lerna run test --npm-client=yarn"
+      "pre-commit": "yarn lint"
     }
   },
   "dependencies": {}

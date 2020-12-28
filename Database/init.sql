@@ -82,3 +82,5 @@ ALTER TABLE public.player_game
         OWNER TO postgres;
 
 INSERT INTO game (name, description) VALUES ('Snake', 'This is the unbeatable snake. Try to beat it.');
+
+INSERT INTO game (name, description) VALUES ('Tetris', 'Game in development.');

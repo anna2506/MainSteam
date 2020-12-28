@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import TextInput from '../TextInput';
 import Button from '../Button';
-import useActions from '../../helpers/useActions';
 import * as playerActions from '../../store/player/actions';
 
 const ButtonWrapper = styled.div`
@@ -17,21 +17,23 @@ const Form = styled.form`
   display: flex;
   flex: 1;
   flex-wrap: wrap;
-  max-height: 345px;
+  max-height: 400px;
 `;
 
 function Register(props) {
+  const dispatch = useDispatch();
   const { closeModal } = props;
-  const [register] = useActions([playerActions.register]);
   const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
+  const [country, setCountry] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
 
   const onSubmit = (event) => {
     event.preventDefault();
     if (login && password && password2 && email && password === password2) {
-      register(login, email, password).then(() => closeModal());
+      dispatch(playerActions.register(login, email, password, country))
+        .then(() => closeModal());
     } else if (password !== password2) {
       // eslint-disable-next-line no-console
       console.error('Пароли не совпадают');
@@ -51,6 +53,12 @@ function Register(props) {
         name="Login*"
         value={login}
         onChange={(event) => setLogin(event.target.value)}
+      />
+      <TextInput
+        name="Country"
+        type="country"
+        value={country}
+        onChange={(event) => setCountry(event.target.value)}
       />
       <TextInput
         name="Password*"

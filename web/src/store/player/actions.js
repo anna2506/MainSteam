@@ -15,10 +15,10 @@ export const logIn = (login, password) => (dispatch) => (
       });
   }));
 
-export const register = (login, email, password) => (dispatch) => (
+export const register = (login, email, password, country) => (dispatch) => (
   new Promise((resolve, reject) => {
     dispatch({ type: actionTypes.REGISTER_REQUEST });
-    services.register(login, email, password)
+    services.register(login, email, password, country)
       .then((data) => {
         dispatch({ type: actionTypes.REGISTER_SUCCESS, data });
         resolve();

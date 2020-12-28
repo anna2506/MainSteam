@@ -1,11 +1,14 @@
 import actionTypes from './actionTypes';
+import calculateLevel from '../../helpers/calculateLevel';
 
 const initialState = {
+  id: 0,
   loggedIn: false,
   login: null,
   email: null,
   country: null,
   experience: 0,
+  level: 0,
   rating: [],
   countries: [],
   errorMessage: '',
@@ -36,7 +39,10 @@ export default function (state = initialState, action) {
     }
     case actionTypes.LOGOUT: {
       localStorage.clear();
-      return { ...initialState };
+      return {
+        ...initialState,
+        loggedIn: false,
+      };
     }
     case actionTypes.PLAYER_SUCCESS:
     case actionTypes.UPDATE_PLAYER_SUCCESS:
@@ -46,6 +52,7 @@ export default function (state = initialState, action) {
         login: action.data.login,
         country: action.data.country,
         experience: action.data.experience,
+        level: calculateLevel(action.data.experience),
       };
     case actionTypes.PLAYER_FAILURE:
     case actionTypes.LOG_IN_FAILURE:

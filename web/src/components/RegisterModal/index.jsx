@@ -45,7 +45,7 @@ const Text = styled.button`
 
 const Content = styled.div`
   padding: 20px 20px;
-  height: ${(props) => (props.isLogin ? '200px' : '350px')};
+  height: ${(props) => (props.isLogin ? '200px' : '420px')};
   overflow: hidden;
   display: flex;
   align-items: center;

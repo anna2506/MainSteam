@@ -40,8 +40,8 @@ const SvgWrapper = styled.div`
   }
 `;
 
-const GameCard = ({ imageSrc, isLocked }) => (
-  <Wrapper to="/store/1">
+const GameCard = ({ imageSrc, isLocked, gameId }) => (
+  <Wrapper to={isLocked ? '/store' : `/store/${gameId}`}>
     <img src={imageSrc} alt=" " />
     <SvgWrapper>
       {isLocked ? <LockSvg /> : <MagnifierSvg />}
@@ -52,6 +52,7 @@ const GameCard = ({ imageSrc, isLocked }) => (
 GameCard.propTypes = {
   imageSrc: PropTypes.string.isRequired,
   isLocked: PropTypes.bool,
+  gameId: PropTypes.number.isRequired,
 };
 
 GameCard.defaultProps = {

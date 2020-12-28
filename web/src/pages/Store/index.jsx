@@ -1,15 +1,13 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import Layout from '../Layout';
 import GameCard from './GameCard';
-import SnakeGameSvg from '../../assets/snake-game.png';
-import PacmanGameSvg from '../../assets/pacman-game.png';
-import {useSelector} from 'react-redux';
 import * as playerSelectors from '../../store/player/selector';
-import useActions from '../../helpers/useActions';
+import * as gameSelectors from '../../store/game/selector';
 import * as playerActions from '../../store/player/actions';
-import * as gamesSelector from '../../store/game/selector';
-import * as gamesActions from '../../store/game/actions';
+import * as gameActions from '../../store/game/actions';
 
 const Content = styled.div`
   display: flex;
@@ -28,30 +26,39 @@ const WelcomeText = styled.p`
   text-align: center;
 `;
 
-const Store = () => {
-    const player = useSelector((state) => playerSelectors.getPlayerInfo(state));
-    const games = useSelector((state) => gamesSelector.getGames(state));
-    const [getPlayer, getGames] = useActions([playerActions.getPlayer, gamesActions.getGames]);
+function Store() {
+  const dispatch = useDispatch();
+  const login = useSelector(playerSelectors.getPlayerName);
+  const level = useSelector(playerSelectors.getLevel);
+  const games = useSelector(gameSelectors.getGames);
 
-    useEffect(() => {
-        getPlayer();
-        getGames();
-    }, []);
+  useEffect(() => {
+    dispatch(playerActions.getPlayer());
+    dispatch(gameActions.getGames());
+  }, [dispatch]);
 
-    const components = Object.values(games)
-        .map(game => <GameCard imageSrc={SnakeGameSvg} key={game.id} isLocked />);
-
-    return (
-        <Layout color="linear-gradient(to top left, rgba(2, 1, 199, 1) 50%, rgba(131, 131, 227, 1) 50% )"
-              bg="linear-gradient(180deg, #5156B0 22.92%, #8383E3 100%)" linkColor="#FFCD48">
-        <WelcomeText>
-          {/* TODO: get username from state */}
-          Hello, {player.login}! Would you like to play some game today?
-        </WelcomeText>
-        <Content>
-            {components}
-        </Content>
-        </Layout>
-)};
+  return (
+    <Layout color="#8383e3">
+      <WelcomeText>
+        Hello,
+        {' '}
+        {login}
+        ! Your level is
+        {' '}
+        {level}
+      </WelcomeText>
+      <Content>
+        {games.map((game) => (
+          <GameCard
+            key={game.id}
+            imageSrc={`${axios.defaults.baseURL}/game/${game.name}/image/logo`}
+            isLocked={game.id > level}
+            gameId={game.id}
+          />
+        ))}
+      </Content>
+    </Layout>
+  );
+}
 
 export default Store;
