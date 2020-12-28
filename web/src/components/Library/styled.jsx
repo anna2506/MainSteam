@@ -14,18 +14,24 @@ export const CardsHeader = styled.p`
 
 export const Card = styled.div`
     display: flex;
+    width: 90%;
     justify-content: space-between;
-    padding-bottom: 1.5em;
+    padding: 1.5em 0.5em;
     margin-bottom: 1.5em;
+    background: rgba(131, 131, 227, .3);
+    
 `;
 
 export const Image = styled.img`
     border: .2em solid #fff;
-    width: 50%;
+    width: 60%;
+    object-fit: cover;
 `;
 
 export const LinkContainer = styled.div`
     width: 40%;
+    padding: 0 .5em;
+    text-align: center;
 `;
 
 export const Link = styled.a`

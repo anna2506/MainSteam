@@ -100,6 +100,13 @@ export const Nickname = styled.p`
     color: #fff;
 `;
 
+export const InputNickname = styled.input`
+    display: block;
+    font-family: inherit;
+    font-size: 1.4rem;
+    
+`
+
 export const Flag = styled.img`
     width: 10%;
     align-self: center;

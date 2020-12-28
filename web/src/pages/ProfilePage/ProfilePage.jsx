@@ -15,7 +15,8 @@ import * as PlayerActions from "../../store/player/actions";
 const ProfilePage = () => {
   const [isEditable, setIsEditable] = useState(false);
   const [description, setDescription] = useState('Something...');
-  const [state, setState] = useState('');
+  const [country, setCountry] = useState('');
+  const [login, setLogin] = useState('');
   const player = useSelector((state) => playerSelectors.getPlayerInfo(state));
   const countries = useSelector((state) => playerSelectors.getCountries(state));
   const [getCountries, getPlayer, updatePlayer] = useActions([playerActions.getCountries,
@@ -29,20 +30,20 @@ const ProfilePage = () => {
 
   const editDescription = (event) => {
     setDescription(event.target.value);
-  }
+  };
 
   const chooseCountry = (event) => {
-    setState(event.target.value);
-  }
+    setCountry(event.target.value);
+  };
 
   const updateProfile = () => {
     updatePlayer({
-      country: state,
+      country: country,
       experience: 100,
       login: player.login,
       email: player.email,
     });
-  }
+  };
 
   const components = Object.values(countries).map((country) =>
       <Styled.Option key={country.alpha2Code}>{country.name}</Styled.Option>);
@@ -81,7 +82,7 @@ const ProfilePage = () => {
               <Library/>
               <Styled.ProfileExtraInfo>
                 <Styled.Status>ONLINE</Styled.Status>
-                {isEditable ? <Select native value={state} onChange={chooseCountry}
+                {isEditable ? <Select native value={country} onChange={chooseCountry}
                                       style={{width: "60%", marginBottom: "1em", color: "#fff",
                                         borderColor: "#fff"}}>
                   {components}
