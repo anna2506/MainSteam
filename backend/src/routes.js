@@ -3,6 +3,7 @@ const dbHelper = require('./databaseHelper');
 const errorMessages = require('./errorMessages');
 const authHelper = require('./authHelper');
 const tokenHelper = require('./token');
+const fs = require('fs');
 
 const appRoot = path.join(path.resolve(__dirname));
 
@@ -197,5 +198,26 @@ module.exports = (app) => {
   app.get('/game/:name/image/logo', async (request, response) => {
     const { name } = request.params;
     return response.sendFile(path.join(appRoot, `/gameImages/${name}/logo.png`));
+  });
+
+  app.post('/player/avatar', async (request, response) => {
+
+    /*const player = await getPlayerInfo(request.headers.authorization);
+    if (player.error) {
+      return response.status(500).json({ message: player.error });
+    }*/
+    if(request.files) {
+      fs.unlink(`${__dirname}/playerAvatar/1.png`, (err) => {
+        if(err) {
+          console.log('Cannot be deleted');
+        } else console.log('Deleted');
+      });
+      let file = request.files.file;
+      await file.mv(`${__dirname}/playerAvatar/1.png`, (err) => {
+        if (err) {
+          console.log('Cannot be uploaded');
+        } else console.log('Uploaded')
+      })
+    }
   });
 };

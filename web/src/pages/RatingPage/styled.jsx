@@ -15,9 +15,10 @@ export const Main = styled.div`
 export const Container = styled.div`
     margin: 0 auto;
     width: 90%;
+    height: 100%;
     max-width: 900px;
     display: flex;
-    
+    align-self: stretch;
     justify-content: space-between;
 `;
 
@@ -27,13 +28,17 @@ export const OverallRating = styled.div`
     flex-direction: column;
 `;
 
-export const PeopleByRating = styled.div`
-    min-height: 15em;
+export const BannerPlace = styled.div`
     width: 20%;
-    display: flex;
-    flex-direction: column;
     background: rgba(0, 0, 0, 0.1);
+    min-height: 100%;
 `;
+
+export const Banner = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`
 
 export const PeopleByRatingTitle = styled.p`
     padding: .5em 0;
@@ -48,6 +53,7 @@ export const Card = styled.div`
     width: 100%;
     padding: 1em;
     align-items: center;
+    margin-top: 1em;
 `;
 
 export const Place = styled.p`

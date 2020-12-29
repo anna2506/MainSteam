@@ -33,8 +33,8 @@ Layout.propTypes = {
 
 Layout.defaultProps = {
   color: '#FFAD64',
-  bg: '#fff',
-  linkColor: '#fff',
+  bg: 'linear-gradient(180deg, #5156B0 22.92%, #8383E3 100%)',
+  linkColor: '#1d1d1d',
 };
 
 export default Layout;

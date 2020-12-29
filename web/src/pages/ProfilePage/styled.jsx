@@ -56,6 +56,13 @@ export const ProfileExtraInfo = styled.div`
 export const ImageDiv = styled.div`
     width: 25%;
     position: relative;
+    transition: all 500ms ease;
+    &:hover > #uploadImage {
+      display: block;
+    }
+    &:hover > #labelImage {
+      display: inline-block;
+    }
 `;
 
 export const OverlayDiv = styled.div`
@@ -71,7 +78,7 @@ export const OverlayDiv = styled.div`
     opacity: 0;
     transition: .5s ease;
     background-color: #fff;
-    &:hover {
+    &:hover, :focus {
         opacity: .5;
         cursor: pointer;
     }
@@ -79,9 +86,10 @@ export const OverlayDiv = styled.div`
 
 export const ProfileImage = styled.img`
     width: 100%;
-    height: auto;
+    min-height: 130px;
     display: block;
     border: .2em solid #fff;
+    object-fit: cover;
 `;
 
 export const ProfileDescription = styled.div`
@@ -98,13 +106,59 @@ export const PersonalInfoDiv = styled.div`
 export const Nickname = styled.p`
     font-size: 1.4rem;
     color: #fff;
+    margin-bottom: .2em;
 `;
 
 export const InputNickname = styled.input`
     display: block;
     font-family: inherit;
     font-size: 1.4rem;
-    
+    background: none;
+    color: white;
+    border: 0;
+    border-bottom: .1em solid #8383E3;
+    margin-bottom: .2em;
+    transition: all 500ms ease-in-out;
+    outline: none;
+    &:hover, :focus {
+      border-bottom: .1em solid #f2f2fc;
+    }
+`;
+
+export const InputImage = styled.input`
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    display: none;
+    z-index: -1;
+    & + #labelImage {
+      text-align: center;
+      margin: 0;
+      transform: translate(-50%, -50%);
+      position: absolute; 
+      top: 50%; 
+      left: 50%;
+      color: white;
+      background-color: transparent;
+      display: none;
+      cursor: pointer;
+    }
+`;
+
+export const LabelInputImage = styled.label`
+    #overlay {
+      opacity: .5;
+      cursor: pointer;
+    }
+`;
+
+export const Figure = styled.img`
+      filter: invert(100%) sepia(97%) saturate(0%) hue-rotate(355deg) brightness(103%) contrast(103%);
+      margin: 0 auto;
+      width: 60%;
+      height: 60%;
 `;
 
 export const Flag = styled.img`
@@ -121,17 +175,14 @@ export const Description = styled.p`
     font-size: .8em;
 `;
 
-export const EditableArea = styled.textarea`
-    width: 55%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: #fff;
-    background: transparent;
-    resize: none;
-    height: 100%;
-    outline: none;
-    border: 1px solid #fff;
-    padding: .5em;
+export const Greeting = styled.p`
+`
+
+export const Rank = styled.span`
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #FFCD48;
+    
 `;
 
 export const SaveBtn = styled.button`

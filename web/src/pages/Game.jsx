@@ -116,7 +116,9 @@ function GamePage(props) {
   }
 
   return (
-    <Layout color="#8383e3">
+    <Layout color="#8383e3"
+            bg={"linear-gradient(180deg, #5156B0 22.92%, #8383E3 100%)"}
+            linkColor={"#1d1d1d"}>
       <Content>
         {game.name && images.map((x) => (
           <Image

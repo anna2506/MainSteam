@@ -4,17 +4,20 @@ import Select from '@material-ui/core/Select';
 import * as playerActions from '../../store/player/actions';
 import * as playerSelectors from '../../store/player/selector';
 import * as Styled from './styled';
+import axios from 'axios';
+import calculateLevel from '../../helpers/calculateLevel';
 import Library from '../../components/Library';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import ProfileImage from '../../assets/ProfileImage.png';
+import Upload from '../../assets/upload.svg';
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const [isEditable, setIsEditable] = useState(false);
-  const [description, setDescription] = useState('Something...');
+  const [newNickname, setNewNickname] = useState('');
   const [newCountry, setNewCountry] = useState('');
   const player = useSelector((state) => playerSelectors.getPlayerInfo(state));
+  const playerId = useSelector((state) => playerSelectors.getPlayerId(state));
   const countries = useSelector((state) => playerSelectors.getCountries(state));
   const countryData = countries.find((curCountry) => curCountry.name === player.country);
 
@@ -23,22 +26,37 @@ const ProfilePage = () => {
     dispatch(playerActions.getCountries());
   }, []);
 
-  const editDescription = (event) => {
-    setDescription(event.target.value);
+  const chooseCountry = (event) => {
+    if (event.target.value) {
+      setNewCountry(event.target.value);
+    } else setNewCountry(player.country);
   };
 
-  const chooseCountry = (event) => {
-    setNewCountry(event.target.value);
-  };
+  const changeNickname = (event) => {
+    setNewNickname(event.target.value);
+  }
 
   const updateProfile = () => {
     dispatch(playerActions.updatePlayer({
       country: newCountry,
-      experience: 100,
-      login: player.login,
+      experience: player.experience,
+      login: newNickname,
       email: player.email,
     }));
   };
+
+  const uploadImage = (event) => {
+    let file = event.target.files[0];
+    let formData = new FormData();
+    formData.append('file', file);
+    axios.post(`${axios.defaults.baseURL}/player/avatar`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }
 
   const components = Object.values(countries).map(
     (countryName) => (
@@ -56,29 +74,44 @@ const ProfilePage = () => {
           <Styled.Main>
             <Styled.ProfileMainContent>
               <Styled.ImageDiv>
-                <Styled.ProfileImage src={ProfileImage} />
-                <Styled.OverlayDiv> </Styled.OverlayDiv>
+                <Styled.ProfileImage src={`${axios.defaults.baseURL}/player/avatar/${playerId + 1}`} />
+                <Styled.InputImage type="file" id="uploadImage" name="uploadImage" accept="image/*" onChange={uploadImage}/>
+                <Styled.LabelInputImage for="uploadImage" id="labelImage">
+                  <Styled.Figure src={Upload} />
+                </Styled.LabelInputImage>
               </Styled.ImageDiv>
               <Styled.ProfileDescription>
                 <Styled.PersonalInfoDiv>
-                  <Styled.Nickname>{player.login}</Styled.Nickname>
-                  {countryData && <Styled.Flag src={countryData.flag} />}
+                  {isEditable ? (<Styled.InputNickname type="text" name="nickname" value={newNickname} onChange={changeNickname} />)
+                    : (<Styled.Nickname>{player.login}</Styled.Nickname>)}
+                  {countryData && !isEditable && <Styled.Flag src={countryData.flag} />}
                 </Styled.PersonalInfoDiv>
-                {isEditable
-                  ? (
-                    <Styled.EditableArea maxlength="50" onChange={editDescription}>
-                      {description}
-                    </Styled.EditableArea>
-                  )
-                  : (
-                    <Styled.Description contenteditable={isEditable}>
-                      {description}
-                    </Styled.Description>
-                  )}
+                <Styled.Description>
+                  {player.experience > 30000 ? <>
+                      <Styled.Greeting>
+                        fear the son of <Styled.Rank>god</Styled.Rank>
+                      </Styled.Greeting>
+                    </>
+                    : player.experience < 5000 ?  <>
+                        <Styled.Greeting>
+                          take care of <Styled.Rank>rookie</Styled.Rank>
+                        </Styled.Greeting>
+                      </>
+                      : player.experience < 15000 ? <>
+                          <Styled.Greeting>
+                            meet the rising <Styled.Rank>legend</Styled.Rank>
+                          </Styled.Greeting>
+                      </>
+                        : <>
+                          <Styled.Greeting>
+                            <Styled.Rank>Kojima</Styled.Rank> of his time
+                          </Styled.Greeting>
+                        </>}
+                </Styled.Description>
               </Styled.ProfileDescription>
             </Styled.ProfileMainContent>
             <Styled.ProfileExtraContent>
-              <Styled.Level>LEVEL 9</Styled.Level>
+              <Styled.Level>LEVEL {calculateLevel(player.experience)}</Styled.Level>
               {isEditable ? (
                 <Styled.SaveBtn onClick={() => {
                   setIsEditable(false);
@@ -89,7 +122,10 @@ const ProfilePage = () => {
                 </Styled.SaveBtn>
               )
                 : (
-                  <Styled.EditProfile onClick={() => (setIsEditable(true))}>
+                  <Styled.EditProfile onClick={() => {
+                    setIsEditable(true);
+                    setNewNickname(player.login);
+                  }}>
                     Edit profile
                   </Styled.EditProfile>
                 )}
@@ -122,7 +158,6 @@ const ProfilePage = () => {
                 : (
                   <Styled.Info>{player.country}</Styled.Info>
                 )}
-              <Styled.Info>ACHIEVEMENTS</Styled.Info>
             </Styled.ProfileExtraInfo>
           </Styled.Aside>
         </Styled.Container>

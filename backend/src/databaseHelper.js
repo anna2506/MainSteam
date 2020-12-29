@@ -121,7 +121,7 @@ const savePlayerGame = async (
 
 const getRating = async () => {
   const rating = await pool.query(`
-  SELECT login, experience, country FROM player ORDER BY experience
+  SELECT login, experience, country FROM player ORDER BY experience DESC
   `);
   return rating.rows;
 };
