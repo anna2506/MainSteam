@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Styled from './styled';
 import Footer from '../../components/Footer';
@@ -19,19 +19,25 @@ const RatingPage = () => {
     dispatch(playerActions.getRating());
   }, []);
 
-  const countryData = (player) => {
-    return countries.find((country) => country.name === player.country);
-  }
+  const countryData = (player) => countries.find((country) => country.name === player.country);
 
   const ratingList = Object.values(rating).map((playerInfo) => {
     place += 1;
     return (
       <Styled.Card>
-        <Styled.Place>#{place}</Styled.Place>
+        <Styled.Place>
+          #
+          {place}
+        </Styled.Place>
         {countryData(playerInfo) && <Styled.Country src={countryData(playerInfo).flag} />}
-        <Styled.Nickname href="#">{playerInfo.login}</Styled.Nickname>
+        <Styled.Nickname href="#">
+          {playerInfo.login}
+        </Styled.Nickname>
+        <Styled.Exp>
+          {playerInfo.experience}
+        </Styled.Exp>
       </Styled.Card>
-    )
+    );
   });
 
   return (

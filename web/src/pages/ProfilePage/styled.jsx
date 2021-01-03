@@ -176,7 +176,7 @@ export const Description = styled.p`
 `;
 
 export const Greeting = styled.p`
-`
+`;
 
 export const Rank = styled.span`
     text-transform: uppercase;

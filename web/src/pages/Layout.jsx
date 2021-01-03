@@ -8,6 +8,7 @@ const Background = styled.div`
   background: ${(props) => props.color};
   min-height: calc(100% - 77.63px - 84.63px);
   padding: 20px 0;
+  position: relative;
 `;
 
 function Layout({

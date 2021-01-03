@@ -38,7 +38,7 @@ export const Banner = styled.img`
     width: 100%;
     height: 100%;
     object-fit: cover;
-`
+`;
 
 export const PeopleByRatingTitle = styled.p`
     padding: .5em 0;
@@ -72,4 +72,8 @@ export const Nickname = styled.a`
     &:hover, focus {
         color: #1d1d1d;
     }    
+`;
+
+export const Exp = styled.p`
+    align-self: flex-end;
 `;

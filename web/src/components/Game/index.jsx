@@ -9,8 +9,8 @@ const GameField = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 500px;
   border: 5px solid black;
 `;
 

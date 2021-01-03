@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import * as gamesSelector from '../../store/game/selector';
 import * as gamesActions from '../../store/game/actions';
 import * as Styled from './styled';
-import axios from "axios";
 
 const Library = () => {
   const dispatch = useDispatch();
