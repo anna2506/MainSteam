@@ -37,13 +37,13 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
     html, body {
-        font-family: 'Black Ops One', cursive;
+        font-family: 'Quantico', sans-serif;
         font-size: 1.125rem;
         height: 100%;
     }
     button {
-        font-family: 'Black Ops One', cursive;
-        font-size: 1.125rem;
+        font-family: inherit;
+        font-size: inherit;
         outline: none;
         color: #fff;
     }

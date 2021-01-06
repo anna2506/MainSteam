@@ -9,15 +9,16 @@ export const Content = styled.div`
 export const Main = styled.div`
     flex: 1 0 auto;
     position: relative;
-    background: #FFAD64;
+    background: linear-gradient(to top left, rgba(255, 205, 72, 1) 50%, rgba(255, 173, 100, 1) 50% );
 `;
 
 export const Container = styled.div`
     margin: 0 auto;
     width: 90%;
+    height: 100%;
     max-width: 900px;
     display: flex;
-    
+    align-self: stretch;
     justify-content: space-between;
 `;
 
@@ -27,12 +28,16 @@ export const OverallRating = styled.div`
     flex-direction: column;
 `;
 
-export const PeopleByRating = styled.div`
-    min-height: 15em;
+export const BannerPlace = styled.div`
     width: 20%;
-    display: flex;
-    flex-direction: column;
     background: rgba(0, 0, 0, 0.1);
+    min-height: 100%;
+`;
+
+export const Banner = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 `;
 
 export const PeopleByRatingTitle = styled.p`
@@ -48,6 +53,7 @@ export const Card = styled.div`
     width: 100%;
     padding: 1em;
     align-items: center;
+    margin-top: 1em;
 `;
 
 export const Place = styled.p`
@@ -61,9 +67,13 @@ export const Country = styled.img`
 
 export const Nickname = styled.a`
     padding-right: 1em;
-    color: #fff;
+    color: #000;
     text-decoration: none;
     &:hover, focus {
         color: #1d1d1d;
     }    
+`;
+
+export const Exp = styled.p`
+    align-self: flex-end;
 `;

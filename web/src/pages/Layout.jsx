@@ -3,18 +3,20 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-
 // 77.63px - NavBar, 84.63px - Footer
 const Background = styled.div`
   background: ${(props) => props.color};
   min-height: calc(100% - 77.63px - 84.63px);
   padding: 20px 0;
+  position: relative;
 `;
 
-function Layout({ children, color }) {
+function Layout({
+  children, color, bg, linkColor,
+}) {
   return (
     <>
-      <Navbar />
+      <Navbar bg={bg} linkColor={linkColor} />
       <Background color={color}>
         {children}
       </Background>
@@ -26,10 +28,14 @@ function Layout({ children, color }) {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.string,
+  bg: PropTypes.string,
+  linkColor: PropTypes.string,
 };
 
 Layout.defaultProps = {
   color: '#FFAD64',
+  bg: 'linear-gradient(180deg, #5156B0 22.92%, #8383E3 100%)',
+  linkColor: '#1d1d1d',
 };
 
 export default Layout;

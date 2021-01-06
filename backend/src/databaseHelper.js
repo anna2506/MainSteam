@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   user: 'postgres',
-  host: 'localhost',
+  host: '192.168.99.100',
   database: 'mainsteam_db',
   password: '123654',
   port: 5432,
@@ -121,7 +121,7 @@ const savePlayerGame = async (
 
 const getRating = async () => {
   const rating = await pool.query(`
-  SELECT login, experience, country FROM player ORDER BY experience
+  SELECT login, experience, country FROM player ORDER BY experience DESC
   `);
   return rating.rows;
 };
